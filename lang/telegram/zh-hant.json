@@ -1,16 +1,19 @@
 {
     "meta": {
-        "name": "繁體中文 (TW)"
+        "name": "繁體中文"
     },
     "strings": {
-        "startMessage": "您好！\n請在這裡輸入 Jellyfin 的 PIN 碼來驗證您的帳戶。",
-        "discordStartMessage": "您好！\n請輸入 “/PIN＜PIN 碼＞” 來驗證您的帳戶。",
-        "matrixStartMessage": "您好\n在 Jellyfin 註冊頁面中輸入以下 PIN 碼以驗證您的帳戶。",
-        "invalidPIN": "該 PIN 碼無效，請重試。",
-        "pinSuccess": "成功！ 您現在可以返回註冊頁面。",
-        "languageMessage": "提示：使用 {command} 查看可用語言，並使用 {command} <language code> 來設置語言。",
-        "languageMessageDiscord": "提示：使用 “/lang <語言>” 設置語言。",
-        "languageSet": "語言設置為｛Language｝。",
-        "discordDMs": "請檢查您的私人通信以獲取回復。"
+        "startMessage": "你好！\n請在這裡輸入 Jellyfin PIN 碼以驗證帳號。",
+        "discordStartMessage": "你好！\n請輸入 `/pin <PIN>` 以驗證帳號。",
+        "matrixStartMessage": "你好\n請在 Jellyfin 註冊頁面輸入下面的 PIN 碼以驗證帳號。",
+        "invalidPIN": "PIN 碼無效，請重試。",
+        "pinSuccess": "成功！現在可以返回註冊頁面。",
+        "languageMessage": "提示：使用 {command} 檢視可用語言，使用 {command} <語言程式碼> 設定語言。",
+        "languageMessageDiscord": "提示：使用 /lang <語言名稱> 設定語言。",
+        "languageSet": "語言已設定為 {language}。",
+        "discordDMs": "請檢視你的 Discord 私信。",
+        "sentInvite": "已傳送邀請。",
+        "sentInviteFailure": "傳送邀請失敗，請檢查記錄。",
+        "noPermission": "你沒有執行此操作的許可權。"
     }
 }

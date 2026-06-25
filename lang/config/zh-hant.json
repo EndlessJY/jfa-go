@@ -1,0 +1,1238 @@
+{
+    "groups": {
+        "external_services": {
+            "name": "整合",
+            "description": "與外部服務整合相關的設定。"
+        },
+        "email": {
+            "name": "郵件",
+            "description": "透過 jfa-go 傳送郵件的相關設定。"
+        },
+        "chatbots": {
+            "name": "聊天機器人",
+            "description": "透過聊天服務傳送訊息的相關設定。"
+        },
+        "sign_up": {
+            "name": "邀請與推薦",
+            "description": "與邀請、註冊頁面和使用者推薦相關的設定。"
+        },
+        "accounts": {
+            "name": "帳戶",
+            "description": "與帳戶管理相關的設定。"
+        }
+    },
+    "sections": {
+        "updates": {
+            "name": "更新",
+            "description": "更新通知和釋出通道相關設定。"
+        },
+        "jellyfin": {
+            "name": "Jellyfin",
+            "description": "連線 Jellyfin 的相關設定。"
+        },
+        "ui": {
+            "name": "通用",
+            "description": "介面和程式功能相關設定。"
+        },
+        "url_paths": {
+            "name": "URL 路徑",
+            "description": "用於修改不同頁面存取路徑的設定。如果修改後忘記了路徑，啟動記錄中會列印這些路徑。路徑應以斜槓開頭，但不要以斜槓結尾。"
+        },
+        "advanced": {
+            "name": "進階",
+            "description": "進階設定。"
+        },
+        "activity_log": {
+            "name": "活動記錄",
+            "description": "活動記錄資料保留相關設定。"
+        },
+        "captcha": {
+            "name": "驗證碼",
+            "description": "帳戶建立驗證碼相關設定。"
+        },
+        "user_page": {
+            "name": "使用者頁面/“我的帳戶”",
+            "description": "使用者頁面（我的帳戶）允許使用者直接存取和修改個人資訊，例如變更或新增聯絡方式、檢視到期日期、傳送推薦邀請，或修改密碼。只要提供聯絡方式或使用者名稱，也可以從這裡發起密碼重置。“通用”中的存取控制設定不適用於此頁面，“帳戶”標籤頁中的“存取 jfa-go”也不適用於此頁面。"
+        },
+        "password_validation": {
+            "name": "密碼校驗",
+            "description": "密碼校驗規則（最小長度等）。"
+        },
+        "messages": {
+            "name": "訊息/通知",
+            "description": "郵件和訊息的通用設定。"
+        },
+        "email": {
+            "name": "郵件",
+            "description": "郵件通用設定。"
+        },
+        "mailgun": {
+            "name": "Mailgun",
+            "description": "Mailgun API 連線設定。"
+        },
+        "smtp": {
+            "name": "SMTP",
+            "description": "SMTP 伺服器連線設定。"
+        },
+        "discord": {
+            "name": "Discord",
+            "description": "Discord 邀請、註冊和通知相關設定。"
+        },
+        "telegram": {
+            "name": "Telegram",
+            "description": "Telegram 註冊和通知相關設定。設定方法請參考 jfa-go wiki。"
+        },
+        "matrix": {
+            "name": "Matrix",
+            "description": "Matrix 邀請、註冊和通知相關設定。設定方法請參考 jfa-go wiki。"
+        },
+        "password_resets": {
+            "name": "密碼重置",
+            "description": "密碼重置處理器相關設定。"
+        },
+        "invite_emails": {
+            "name": "邀請訊息",
+            "description": "直接向使用者傳送邀請的相關設定。"
+        },
+        "template_email": {
+            "name": "自定義郵件範本",
+            "description": "公告和自定義訊息所用範本的設定。HTML 範本應包含 {{ .text }}，純文字範本應包含 {{ .plaintext }}；兩者都可以包含 {{ .message }} 來插入聯絡資訊。"
+        },
+        "notifications": {
+            "name": "管理員通知",
+            "description": "允許按邀請單獨開關傳送給管理員的“使用者已建立”和“邀請已過期”通知。"
+        },
+        "ombi": {
+            "name": "Ombi",
+            "description": "連線 Ombi 後，可在新使用者註冊時自動建立 Ombi 和 Jellyfin 帳戶。需要將 Ombi 範本新增到已有使用者設定檔中，帳戶才會被建立；你可以重新整理後在“設定 > 使用者設定檔”中檢查。若要同時處理 Ombi 和 Jellyfin 的密碼重置，請啟用“使用重置連結而不是 PIN”。"
+        },
+        "jellyseerr": {
+            "name": "Jellyseerr",
+            "description": "連線 Jellyseerr 後，會在帳戶建立時自動觸發使用者匯入，並自動關聯聯絡方式（電子郵件、Discord 和 Telegram）。必須先將範本新增到使用者設定檔中，帳戶才會被建立。"
+        },
+        "backups": {
+            "name": "備份",
+            "description": "資料庫備份相關設定。按一下上方“備份”按鈕可建立、下載和恢復備份。"
+        },
+        "welcome_email": {
+            "name": "歡迎訊息",
+            "description": "可選：向新使用者傳送包含 Jellyfin URL 和使用者名稱的歡迎訊息。"
+        },
+        "email_confirmation": {
+            "name": "電子郵件確認",
+            "description": "啟用後，使用者會收到電子郵件確認連結，用於在建立帳戶前確認密碼正確。"
+        },
+        "user_expiry": {
+            "name": "帳戶到期",
+            "description": "在邀請中設定後，使用者建立帳戶經過指定時間後會被刪除或停用。也可以為單個使用者設定或延長到期時間，並可選擇附帶說明原因的訊息。"
+        },
+        "disable_enable": {
+            "name": "帳戶停用/啟用",
+            "description": "帳戶停用/啟用郵件的主題和郵件檔案設定。"
+        },
+        "deletion": {
+            "name": "帳戶刪除",
+            "description": "帳戶刪除郵件的主題和郵件檔案設定。"
+        },
+        "webhooks": {
+            "name": "Webhooks",
+            "description": "事件發生時，jfa-go 會向這些 URL 傳送包含相關資訊的 POST 請求。啟用除錯記錄後，請求資訊會被記錄。"
+        },
+        "files": {
+            "name": "檔案儲存",
+            "description": "用於修改儲存位置的可選設定。"
+        }
+    },
+    "settings": {
+        "updates": {
+            "enabled": {
+                "name": "啟用",
+                "description": "啟用或停用更新通知，以及更新的下載和套用。"
+            },
+            "channel": {
+                "name": "釋出通道",
+                "description": "用於接收更新的釋出通道。"
+            }
+        },
+        "jellyfin": {
+            "username": {
+                "name": "Jellyfin 使用者名稱",
+                "description": "建議為此程式建立一個許可權受限的管理員帳戶。"
+            },
+            "password": {
+                "name": "Jellyfin 密碼"
+            },
+            "server": {
+                "name": "伺服器位址",
+                "description": "Jellyfin 伺服器位址。可以填寫公網地址；出於安全考慮，也可以填寫本地地址。"
+            },
+            "public_server": {
+                "name": "公開存取地址",
+                "description": "邀請表單中展示給使用者存取的 Jellyfin 地址。留空則複用上方地址。"
+            },
+            "client": {
+                "name": "客戶端名稱",
+                "description": "顯示在 Jellyfin 儀表盤中的客戶端名稱。"
+            },
+            "cache_timeout": {
+                "name": "使用者快取超時（分鐘）",
+                "description": "使用者快取的超時時間，單位為分鐘。設為 0 可停用快取。"
+            },
+            "web_cache_async_timeout": {
+                "name": "使用者搜尋快取非同步重新整理時間（分鐘）",
+                "description": "快取達到此時間後非同步同步，但頁面不會等待同步完成：帳戶標籤頁會更快載入，但在下一次請求前可能顯示舊結果。"
+            },
+            "web_cache_sync_timeout": {
+                "name": "使用者搜尋快取同步重新整理時間（分鐘）",
+                "description": "快取達到此時間後同步重新整理並等待完成：帳戶標籤頁載入可能稍慢，但會顯示最新結果。"
+            },
+            "activity_cache_sync_timeout": {
+                "name": "活動快取超時（分鐘）",
+                "description": "快取達到此時間後同步 Jellyfin 活動記錄。同步只拉取新記錄，通常很快，因此可以設得較低。注意：這與 jfa-go 自己的活動記錄無關。"
+            },
+            "type": {
+                "name": "伺服器型別",
+                "description": "注意：Emby 整合可以使用，但缺少部分功能，例如密碼重置。"
+            },
+            "substitute_jellyfin_strings": {
+                "name": "替換 “Jellyfin” 文案",
+                "description": "可選：用此文字替換帳戶建立表單和郵件中的 “Jellyfin”。可能會導致語句不夠自然。"
+            }
+        },
+        "ui": {
+            "language-form": {
+                "name": "預設表單語言",
+                "description": "帳號表單預設語言。如需參與翻譯，請存取 weblate.jfa-go.com。"
+            },
+            "language-admin": {
+                "name": "預設管理端語言",
+                "description": "管理頁面預設語言。如需參與翻譯，請存取 weblate.jfa-go.com。"
+            },
+            "theme": {
+                "name": "預設外觀",
+                "description": "所有使用者的預設介面外觀。"
+            },
+            "host": {
+                "name": "監聽位址",
+                "description": "設為 0.0.0.0 可在本機監聽所有地址。"
+            },
+            "port": {
+                "name": "連接埠"
+            },
+            "jellyfin_login": {
+                "name": "使用 Jellyfin 進行身分驗證",
+                "description": "啟用後將使用 Jellyfin 使用者登入，而不是使用下方的網頁使用者名稱和密碼。"
+            },
+            "admin_only": {
+                "name": "僅允許管理員存取“管理”頁面",
+                "description": "僅允許 Jellyfin 中的管理員使用者存取管理頁面。不適用於“我的帳戶”頁面。"
+            },
+            "allow_all": {
+                "name": "允許所有使用者登入“管理”頁面",
+                "description": "允許所有 Jellyfin 使用者存取 jfa-go。不建議這樣做，建議在“帳戶”標籤頁中單獨新增使用者。不適用於“我的帳戶”頁面。"
+            },
+            "username": {
+                "name": "網頁使用者名稱",
+                "description": "管理頁面登入使用者名稱（如果使用 jellyfin_login，可留空）。"
+            },
+            "password": {
+                "name": "網頁密碼",
+                "description": "管理頁面登入密碼（如果使用 jellyfin_login，可留空）。"
+            },
+            "email": {
+                "name": "管理員電子郵件位址",
+                "description": "接收通知的電子郵件位址（如果使用 jellyfin_login，可留空）。"
+            },
+            "debug": {
+                "name": "除錯記錄",
+                "description": "啟用除錯記錄，並開放 pprof 路由（不要在生產環境中使用！）。"
+            },
+            "contact_message": {
+                "name": "聯絡資訊",
+                "description": "顯示在除管理頁面外所有頁面的底部。"
+            },
+            "help_message": {
+                "name": "幫助說明",
+                "description": "顯示在邀請表單頂部。"
+            },
+            "success_message": {
+                "name": "成功提示",
+                "description": "使用者建立帳戶成功後顯示。若需要更精細的控制，請使用訊息編輯器中的“註冊後卡片”。"
+            },
+            "subfolder_note": {
+                "name": "反向代理到子路徑？",
+                "description": "將子路徑（例如 /accounts）填寫到“反向代理子路徑”，並將包含該路徑的完整 URL（例如 https://jellyf.in/accounts）填寫到“外部 jfa-go URL”。"
+            },
+            "jfa_url": {
+                "name": "外部 jfa-go URL",
+                "description": "可存取 jfa-go 根路徑（通常是管理頁面）的 URL。如果使用子路徑，請一並填寫。雖然反向代理通常會報告這些資訊，但傳送邀請訊息等伺服器端操作無法自動獲知。"
+            },
+            "use_proxy_host": {
+                "name": "儘可能使用反向代理報告的 “Host”",
+                "description": "啟用後，網頁套用會優先使用反向代理報告的 “Host”，而不是“外部 jfa-go URL”的值。如果你經常透過多個主機名稱或域名存取 jfa-go，這會很有用。同時請確保代理會傳遞 X-Forwarded-Proto 或 X-Forwarded-Protocol。"
+            },
+            "url_base": {
+                "name": "反向代理子路徑",
+                "description": "透過反向代理將 jfa-go 放在子路徑下執行時使用的 URL 基路徑。請包含開頭的 /，例如 “/accounts”。"
+            },
+            "redirect_url": {
+                "name": "表單成功後跳轉 URL",
+                "description": "設定使用者註冊成功後邀請表單跳轉到的其他 URL。預設使用 Jellyfin 標籤頁中的“公開位址”或“伺服器位址”。"
+            },
+            "auto_redirect": {
+                "name": "成功後自動跳轉",
+                "description": "成功後直接跳轉到上方 URL，不再要求使用者按一下“繼續”。此設定會覆蓋註冊後卡片。"
+            },
+            "login_appearance": {
+                "name": "登入介面外觀",
+                "description": "管理端登入介面的外觀。"
+            },
+            "urlpaths_note": {
+                "name": "URL 路徑：",
+                "description": "想讓“我的帳戶”位於 “/”，或讓管理頁面位於 “/admin”？請啟用進階設定，並檢視“URL 路徑”部分。"
+            }
+        },
+        "url_paths": {
+            "admin": {
+                "name": "管理頁面子路徑",
+                "description": "管理頁面所在的 URL 子路徑。"
+            },
+            "user_page": {
+                "name": "“我的帳戶”子路徑",
+                "description": "“我的帳戶”頁面所在的 URL 子路徑。"
+            },
+            "form": {
+                "name": "邀請頁面子路徑",
+                "description": "邀請頁面所在的 URL 子路徑。"
+            }
+        },
+        "advanced": {
+            "log_ips": {
+                "name": "記錄存取管理頁面的 IP",
+                "description": "在控制檯和活動記錄中記錄管理員及管理頁面請求的 IP 地址。請閱讀下方關於合法性的提示。"
+            },
+            "log_ips_users": {
+                "name": "記錄存取使用者頁面的 IP",
+                "description": "在控制檯和活動記錄中記錄使用者 IP 地址。請閱讀下方關於合法性的提示。"
+            },
+            "ip_note": {
+                "name": "記錄 IP：",
+                "description": "透過 jfa-go 記錄 IP 地址可能違反 GDPR 或其他隱私法規，因為 IP 會與帳戶資訊關聯。請自行承擔啟用風險。"
+            },
+            "tls": {
+                "name": "TLS/HTTP2",
+                "description": "透過 TLS 提供套用服務，並啟用 HTTP2 預載入。"
+            },
+            "tls_port": {
+                "name": "TLS 連接埠",
+                "description": "TLS 伺服器監聽連接埠。"
+            },
+            "tls_cert": {
+                "name": "TLS 證書路徑",
+                "description": ".crt 檔案路徑。更多資訊請參考 jfa-go wiki。"
+            },
+            "tls_key": {
+                "name": "TLS 金鑰檔案路徑",
+                "description": ".key 檔案路徑。更多資訊請參考 jfa-go wiki。"
+            },
+            "auth_retry_count": {
+                "name": "初始認證重試次數",
+                "description": "初始連線 Jellyfin 失敗前的重試次數。"
+            },
+            "auth_retry_gap": {
+                "name": "初始認證重試間隔（秒）",
+                "description": "每次連線重試之間等待的秒數。"
+            },
+            "proxy": {
+                "name": "使用代理",
+                "description": "是否使用 HTTP/SOCKS5 代理。"
+            },
+            "proxy_protocol": {
+                "name": "代理協議",
+                "description": "代理連線使用的協議。"
+            },
+            "proxy_address": {
+                "name": "代理位址",
+                "description": "代理位址，包含連接埠。"
+            },
+            "proxy_user": {
+                "name": "代理使用者名稱",
+                "description": "如果不需要身分驗證，請留空。"
+            },
+            "proxy_password": {
+                "name": "代理密碼",
+                "description": "如果不需要身分驗證，請留空。"
+            },
+            "value_log_note": {
+                "name": "Value Log：",
+                "description": "設定資料夾中的 Value Log（vlog）檔案用於確保資料庫資料完整性。它可能變得很大，因此可以調整最大大小。退出 jfa-go 後，可以安全刪除該檔案且不會丟失資料。"
+            },
+            "value_log_size": {
+                "name": "資料庫最大 vlog 大小（MiB）",
+                "description": "資料庫 Value Log 的最大大小。較小的值可能降低效能。"
+            },
+            "debug_log_emails": {
+                "name": "除錯儲存記錄：郵件",
+                "description": "為資料庫寫入增加額外除錯記錄。*：刪除也包括清空主要欄位，例如電子郵件位址。"
+            },
+            "debug_log_discord": {
+                "name": "除錯儲存記錄：Discord",
+                "description": "為資料庫寫入增加額外除錯記錄。*：刪除也包括清空主要欄位，例如電子郵件位址。"
+            },
+            "debug_log_telegram": {
+                "name": "除錯儲存記錄：Telegram",
+                "description": "為資料庫寫入增加額外除錯記錄。*：刪除也包括清空主要欄位，例如電子郵件位址。"
+            },
+            "debug_log_matrix": {
+                "name": "除錯儲存記錄：Matrix",
+                "description": "為資料庫寫入增加額外除錯記錄。*：刪除也包括清空主要欄位，例如電子郵件位址。"
+            },
+            "debug_log_invites": {
+                "name": "除錯儲存記錄：邀請",
+                "description": "為資料庫寫入增加額外除錯記錄。*：刪除也包括清空主要欄位，例如電子郵件位址。"
+            },
+            "debug_log_announcements": {
+                "name": "除錯儲存記錄：公告",
+                "description": "為資料庫寫入增加額外除錯記錄。*：刪除也包括清空主要欄位，例如電子郵件位址。"
+            },
+            "debug_log_expiries": {
+                "name": "除錯儲存記錄：使用者到期",
+                "description": "為資料庫寫入增加額外除錯記錄。*：刪除也包括清空主要欄位，例如電子郵件位址。"
+            },
+            "debug_log_profiles": {
+                "name": "除錯儲存記錄：設定檔",
+                "description": "為資料庫寫入增加額外除錯記錄。*：刪除也包括清空主要欄位，例如電子郵件位址。"
+            },
+            "debug_log_custom_content": {
+                "name": "除錯儲存記錄：自定義訊息內容",
+                "description": "為資料庫寫入增加額外除錯記錄。*：刪除也包括清空主要欄位，例如電子郵件位址。"
+            }
+        },
+        "activity_log": {
+            "keep_n_records": {
+                "name": "保留記錄數量",
+                "description": "要保留的最近活動數量。設為 0 可停用。"
+            },
+            "delete_after_days": {
+                "name": "刪除早於指定天數的活動：",
+                "description": "如果活動建立時間早於此天數，將被刪除。設為 0 可停用。"
+            }
+        },
+        "captcha": {
+            "enabled": {
+                "name": "啟用",
+                "description": "在帳戶建立表單中啟用驗證碼。"
+            },
+            "recaptcha": {
+                "name": "使用 Google reCAPTCHA",
+                "description": "更可靠，但需要一些設定。更多資訊請參考 jfa-go wiki。"
+            },
+            "recaptcha_site_key": {
+                "name": "reCAPTCHA 站點金鑰",
+                "description": "站點金鑰。獲取方式請參考 jfa-go wiki。"
+            },
+            "recaptcha_secret_key": {
+                "name": "reCAPTCHA 金鑰",
+                "description": "金鑰。獲取方式請參考 jfa-go wiki。"
+            },
+            "recaptcha_hostname": {
+                "name": "主機名稱",
+                "description": "jfa-go 的公開主機名稱，例如 “site.com”。不要包含任何子路徑。"
+            }
+        },
+        "user_page": {
+            "enabled": {
+                "name": "啟用"
+            },
+            "jellyfin_login_note": {
+                "name": "注意：",
+                "description": "必須啟用 Jellyfin 登入才能使用此功能，並且必須啟用透過連結重置密碼，使用者才能自助操作。"
+            },
+            "edit_note": {
+                "name": "訊息卡片：",
+                "description": "按一下“使用者頁面”設定旁的編輯圖示，可新增展示給使用者的自定義 Markdown 訊息。注意：訊息卡片不是私密內容，其他人較容易檢視到。"
+            },
+            "show_link": {
+                "name": "在管理端登入頁顯示連結",
+                "description": "是否在管理端登入介面顯示“我的帳戶”頁面連結，用於引導走錯頁面的使用者。"
+            },
+            "referrals": {
+                "name": "使用者推薦",
+                "description": "為使用者分配自己的“邀請”，方便他們傳送給其他人。"
+            },
+            "referrals_note": {
+                "name": "使用推薦：",
+                "description": "先建立一個帶有所需設定的邀請，然後在“帳戶”標籤頁中分配給使用者，或在設定中分配給設定檔。"
+            },
+            "allow_pwr_username": {
+                "name": "允許用使用者名稱發起密碼重置",
+                "description": "允許使用者輸入使用者名稱來發起密碼重置。"
+            },
+            "allow_pwr_email": {
+                "name": "允許用電子郵件位址發起密碼重置",
+                "description": "允許使用者輸入電子郵件位址來發起密碼重置。"
+            },
+            "allow_pwr_contact_method": {
+                "name": "允許用 Discord/Telegram/Matrix 發起密碼重置",
+                "description": "允許使用者輸入 Discord/Telegram/Matrix 使用者名稱或 ID 來發起密碼重置。"
+            },
+            "pwr_note": {
+                "name": "密碼重置方式：",
+                "description": "請至少選擇一種密碼重置發起方式。如果不選擇任何方式，將全部啟用。"
+            }
+        },
+        "password_validation": {
+            "enabled": {
+                "name": "啟用"
+            },
+            "min_length": {
+                "name": "最小長度"
+            },
+            "upper": {
+                "name": "最少大寫字母數"
+            },
+            "lower": {
+                "name": "最少小寫字母數"
+            },
+            "number": {
+                "name": "最少數字數量"
+            },
+            "special": {
+                "name": "最少特殊字元數量"
+            }
+        },
+        "messages": {
+            "enabled": {
+                "name": "啟用",
+                "description": "啟用密碼重置、公告等郵件/訊息傳送功能。"
+            },
+            "use_24h": {
+                "name": "使用 24 小時制"
+            },
+            "date_format": {
+                "name": "日期格式",
+                "description": "郵件中使用的日期格式。遵循 datetime.strftime 格式。"
+            },
+            "message": {
+                "name": "幫助說明",
+                "description": "顯示在郵件底部的訊息。"
+            },
+            "edit_note": {
+                "name": "自定義訊息：",
+                "description": "按一下“訊息/通知”設定旁的編輯圖示，可使用 Markdown 自定義傳送給使用者的訊息。"
+            }
+        },
+        "email": {
+            "language": {
+                "name": "郵件語言",
+                "description": "預設郵件語言。如需參與翻譯，請在 GitHub 提交 PR。"
+            },
+            "collect": {
+                "name": "註冊時收集",
+                "description": "在註冊表單中要求使用者填寫電子郵件位址。"
+            },
+            "required": {
+                "name": "註冊時必填",
+                "description": "註冊時要求填寫電子郵件位址。"
+            },
+            "require_unique": {
+                "name": "要求地址唯一",
+                "description": "禁止多個帳戶使用同一個地址。"
+            },
+            "no_username": {
+                "name": "使用電子郵件位址作為使用者名稱",
+                "description": "將邀請表單中的電子郵件位址作為 Jellyfin 使用者名稱。"
+            },
+            "method": {
+                "name": "郵件傳送方式",
+                "description": "要使用的郵件傳送方式。"
+            },
+            "address": {
+                "name": "發件人（地址）",
+                "description": "用於傳送郵件的發件地址。"
+            },
+            "from": {
+                "name": "發件人（名稱）",
+                "description": "發件人顯示名稱。"
+            },
+            "plaintext": {
+                "name": "以純文字傳送郵件",
+                "description": "以純文字而不是 HTML 格式傳送郵件。"
+            },
+            "test_note": {
+                "name": "測試設定：",
+                "description": "前往“帳戶”標籤頁，選擇你的使用者（確保已分配電子郵件位址），然後給自己傳送一條公告。"
+            }
+        },
+        "mailgun": {
+            "api_url": {
+                "name": "API URL"
+            },
+            "api_key": {
+                "name": "API 金鑰"
+            }
+        },
+        "smtp": {
+            "username": {
+                "name": "使用者名稱",
+                "description": "SMTP 使用者名稱。留空則使用發件地址作為使用者名稱。"
+            },
+            "encryption": {
+                "name": "加密方式",
+                "description": "你的郵件服務供應商應為不同加密方式提供不同連接埠。通常 ssl_tls 使用 465，starttls 使用 587。"
+            },
+            "server": {
+                "name": "伺服器位址",
+                "description": "SMTP 伺服器位址。"
+            },
+            "port": {
+                "name": "連接埠"
+            },
+            "password": {
+                "name": "密碼"
+            },
+            "hello_hostname": {
+                "name": "HELLO 主機名稱",
+                "description": "向 SMTP 伺服器傳送 HELLO 時使用的主機名稱。有些伺服器不接受預設的 “localhost”，例如 smtp-relay.gmail.com。"
+            },
+            "ssl_cert": {
+                "name": "自定義 SSL 證書路徑",
+                "description": "當系統不信任你的 SMTP 伺服器 SSL 證書時使用。"
+            },
+            "cert_validation": {
+                "name": "驗證證書",
+                "description": "警告：停用此項會顯著增加遭受中間人攻擊的風險。"
+            },
+            "auth_type": {
+                "name": "身分驗證型別",
+                "description": "SMTP 身分驗證方式。"
+            }
+        },
+        "discord": {
+            "enabled": {
+                "name": "啟用",
+                "description": "啟用透過 Discord 進行註冊驗證，並透過 Discord 傳送通知。\n機器人設定方法請參考 jfa-go wiki。"
+            },
+            "show_on_reg": {
+                "name": "在使用者註冊時顯示",
+                "description": "允許使用者在註冊頁面關聯 Discord。"
+            },
+            "required": {
+                "name": "註冊時必填",
+                "description": "註冊時要求關聯 Discord。設定方法請參考 jfa-go wiki。"
+            },
+            "require_unique": {
+                "name": "要求使用者唯一",
+                "description": "禁止多個 Jellyfin 帳戶使用同一個使用者。"
+            },
+            "token": {
+                "name": "API 令牌",
+                "description": "Discord 機器人 API 令牌。"
+            },
+            "start_command": {
+                "name": "啟動命令",
+                "description": "用於啟動使用者驗證流程的命令。"
+            },
+            "channel": {
+                "name": "監聽頻道",
+                "description": "只監聽指定頻道中的命令。留空則監聽全部頻道。"
+            },
+            "provide_invite": {
+                "name": "提供伺服器邀請",
+                "description": "為帳戶建立表單產生一次性 Discord 伺服器邀請。需要機器人具備“建立即時邀請”許可權，之後你可能需要將機器人重新新增到伺服器。"
+            },
+            "invite_channel": {
+                "name": "邀請頻道",
+                "description": "邀請新使用者加入的頻道名稱。"
+            },
+            "apply_role": {
+                "name": "關聯後套用角色",
+                "description": "使用者註冊時為其新增所選角色。"
+            },
+            "disable_enable_role": {
+                "name": "使用者啟用、停用或刪除時移除/新增角色",
+                "description": "使用者被停用或刪除時移除 Discord 角色；重新啟用時再加回。"
+            },
+            "language": {
+                "name": "語言",
+                "description": "預設 Discord 訊息語言。如需參與翻譯，請存取 Weblate。"
+            }
+        },
+        "telegram": {
+            "enabled": {
+                "name": "啟用",
+                "description": "啟用透過 Telegram 進行註冊驗證，並透過 Telegram 傳送通知。\n機器人設定方法請參考 jfa-go wiki。"
+            },
+            "show_on_reg": {
+                "name": "在使用者註冊時顯示",
+                "description": "允許使用者在註冊頁面關聯 Telegram。"
+            },
+            "required": {
+                "name": "註冊時必填",
+                "description": "註冊時要求關聯 Telegram。"
+            },
+            "require_unique": {
+                "name": "要求使用者唯一",
+                "description": "禁止多個 Jellyfin 帳戶使用同一個使用者。"
+            },
+            "token": {
+                "name": "API 令牌",
+                "description": "Telegram 機器人 API 令牌。"
+            },
+            "language": {
+                "name": "語言",
+                "description": "預設 Telegram 訊息語言。如需參與翻譯，請存取 Weblate。"
+            },
+            "ignore_client_language": {
+                "name": "始終使用預設語言",
+                "description": "停用時，jfa-go 會檢查 Telegram 使用者的語言，並在可用時使用該語言。啟用後將忽略使用者語言，始終使用你設定的預設語言。"
+            }
+        },
+        "matrix": {
+            "enabled": {
+                "name": "啟用",
+                "description": "啟用透過 Matrix 進行註冊驗證，並透過 Matrix 傳送通知。\n機器人設定方法請參考 jfa-go wiki。"
+            },
+            "show_on_reg": {
+                "name": "在使用者註冊時顯示",
+                "description": "允許使用者在註冊頁面關聯 Matrix。"
+            },
+            "required": {
+                "name": "註冊時必填",
+                "description": "註冊時要求關聯 Matrix。"
+            },
+            "require_unique": {
+                "name": "要求使用者唯一",
+                "description": "禁止多個 Jellyfin 帳戶使用同一個使用者。"
+            },
+            "homeserver": {
+                "name": "主伺服器 URL",
+                "description": "Matrix 主伺服器 URL。"
+            },
+            "token": {
+                "name": "存取令牌",
+                "description": "Matrix 機器人 API 令牌。"
+            },
+            "user_id": {
+                "name": "機器人使用者 ID",
+                "description": "機器人帳戶的使用者 ID（示例：@jfa-bot:riot.im）。"
+            },
+            "topic": {
+                "name": "聊天主題",
+                "description": "Matrix 私聊的主題。"
+            },
+            "language": {
+                "name": "語言",
+                "description": "預設 Matrix 訊息語言。如需參與翻譯，請存取 Weblate。"
+            },
+            "encryption": {
+                "name": "端到端加密",
+                "description": "為訊息啟用端到端加密。"
+            },
+            "e2ee_note": {
+                "name": "端到端加密：",
+                "description": "如果你看不到此設定，說明當前 jfa-go 版本不包含此功能。更多資訊請參考 wiki。"
+            }
+        },
+        "password_resets": {
+            "enabled": {
+                "name": "啟用",
+                "description": "啟用後會儲存使用者提供的電子郵件位址、監控 Jellyfin 目錄中的密碼重置檔案，並傳送重置 PIN。"
+            },
+            "pwr_note": {
+                "name": "設定：",
+                "description": "密碼重置有多種設定方式。更多資訊請參考 wiki 頁面。"
+            },
+            "watch_directory": {
+                "name": "Jellyfin 目錄",
+                "description": "Jellyfin 放置密碼重置檔案的資料夾路徑。"
+            },
+            "watch_polling": {
+                "name": "使用輪詢",
+                "description": "如果透過網路掛載（NFS/SMB/SFTP），請使用此項。它會定期檢查 Jellyfin 目錄，而不是使用作業系統監聽 API。"
+            },
+            "link_reset": {
+                "name": "使用重置連結而不是 PIN（Ombi 必需）",
+                "description": "向使用者傳送密碼重置連結，而不是 PIN。若要同時重置 Ombi 和 Jellyfin 密碼，必須啟用此項。"
+            },
+            "set_password": {
+                "name": "透過連結設定密碼",
+                "description": "不再自動將使用者密碼設為 PIN，而是允許使用者透過重置連結設定新密碼。"
+            },
+            "url_base": {
+                "name": "外部 jfa-go URL",
+                "description": "可存取 jfa-go 管理頁面的 URL。如果使用子路徑，請一並填寫。如果已在“邀請郵件”中設定，可保留該值。使用反向代理時，程式無法自行得知外部 URL，因此需要此設定。"
+            },
+            "jfa_url": {
+                "name": "產生重置連結：",
+                "description": "請在“通用”中設定“外部 jfa-go URL”，以便產生指向 jfa-go 的連結。"
+            },
+            "language": {
+                "name": "預設重置連結語言",
+                "description": "密碼重置成功頁面的預設語言。"
+            },
+            "email_html": {
+                "name": "自定義郵件（HTML）",
+                "description": "自定義 HTML 郵件路徑。"
+            },
+            "email_text": {
+                "name": "自定義郵件（純文字）",
+                "description": "自定義純文字郵件路徑。"
+            },
+            "subject": {
+                "name": "郵件主題",
+                "description": "密碼重置郵件的主題。"
+            }
+        },
+        "invite_emails": {
+            "enabled": {
+                "name": "啟用"
+            },
+            "email_html": {
+                "name": "自定義郵件（HTML）",
+                "description": "自定義 HTML 郵件路徑。"
+            },
+            "email_text": {
+                "name": "自定義郵件（純文字）",
+                "description": "自定義純文字郵件路徑。"
+            },
+            "subject": {
+                "name": "郵件主題",
+                "description": "邀請郵件的主題。"
+            },
+            "url_base": {
+                "name": "外部 jfa-go URL",
+                "description": "可存取 jfa-go 根路徑（管理頁面）的 URL。如果使用子路徑，請一並填寫。如果已在“邀請郵件”中設定，可保留該值。使用反向代理時，程式無法自行得知外部 URL，因此需要此設定。"
+            },
+            "jfa_url": {
+                "name": "產生連結：",
+                "description": "請在“通用”中設定“外部 jfa-go URL”，以便產生指向 jfa-go 的連結。"
+            }
+        },
+        "template_email": {
+            "email_html": {
+                "name": "自定義範本郵件（HTML）",
+                "description": "公告/自定義訊息所用自定義 HTML 郵件範本路徑。"
+            },
+            "email_text": {
+                "name": "自定義範本郵件（純文字）",
+                "description": "公告/自定義訊息所用自定義純文字郵件範本路徑。"
+            }
+        },
+        "notifications": {
+            "enabled": {
+                "name": "啟用",
+                "description": "啟用後，會在邀請中新增可選開關，用於在邀請過期和使用者建立時傳送通知。"
+            },
+            "expiry_html": {
+                "name": "過期通知郵件（HTML）",
+                "description": "過期通知 HTML 郵件路徑。"
+            },
+            "expiry_text": {
+                "name": "過期通知郵件（純文字）",
+                "description": "過期通知純文字郵件路徑。"
+            },
+            "created_html": {
+                "name": "使用者建立通知郵件（HTML）",
+                "description": "使用者建立通知 HTML 郵件路徑。"
+            },
+            "created_text": {
+                "name": "使用者建立通知郵件（純文字）",
+                "description": "使用者建立通知純文字郵件路徑。"
+            }
+        },
+        "ombi": {
+            "enabled": {
+                "name": "啟用",
+                "description": "啟用後會為新的 Jellyfin 使用者建立 Ombi 帳戶。"
+            },
+            "server": {
+                "name": "URL",
+                "description": "Ombi 伺服器 URL，需包含 http(s)://。"
+            },
+            "api_key": {
+                "name": "API 金鑰",
+                "description": "API 金鑰。可在 Ombi 設定的第一個標籤頁中獲取。"
+            }
+        },
+        "jellyseerr": {
+            "enabled": {
+                "name": "啟用",
+                "description": "啟用 Jellyseerr 整合。"
+            },
+            "usertype_note": {
+                "name": "密碼變更：",
+                "description": "請確保 Jellyseerr 中的現有使用者是 “Jellyfin User”，而不是 “Local User”，因為本地使用者的密碼變更不會同步到 Jellyseerr。"
+            },
+            "server": {
+                "name": "URL",
+                "description": "Jellyseerr 伺服器 URL。"
+            },
+            "api_key": {
+                "name": "API 金鑰",
+                "description": "API 金鑰。可在 Jellyseerr 設定的第一個標籤頁中獲取（不是 “Jellyfin” 標籤頁！）。"
+            },
+            "import_existing": {
+                "name": "將現有使用者匯入 Jellyseerr",
+                "description": "現有使用者（以及在 jfa-go 外部建立的使用者）的聯絡方式會被匯入 Jellyseerr。"
+            },
+            "constraints_note": {
+                "name": "電子郵件唯一性：",
+                "description": "Jellyseerr 要求電子郵件位址唯一。如果不滿足此條件，你可能會在 jfa-go 記錄中看到錯誤。可在“設定 > 郵件”中要求電子郵件位址唯一。"
+            }
+        },
+        "backups": {
+            "enabled": {
+                "name": "定時備份",
+                "description": "啟用後按計劃產生資料庫備份。"
+            },
+            "path": {
+                "name": "備份路徑",
+                "description": "用於儲存備份的目錄路徑。預設是 <data_directory>/backups。"
+            },
+            "every_n_minutes": {
+                "name": "備份頻率（分鐘）",
+                "description": "距離上次備份經過此分鐘數後再次備份。每次重啟後重新計時。"
+            },
+            "keep_n_backups": {
+                "name": "保留備份數量",
+                "description": "要保留的最新備份數量。達到上限後，建立新備份前會先刪除最舊備份。"
+            },
+            "keep_previous_version_backup": {
+                "name": "為每個舊版本保留 1 個備份",
+                "description": "始終保留每個 jfa-go 版本的最新備份，以防更新出現問題。啟用後，這些備份不計入“保留備份數量”。"
+            }
+        },
+        "welcome_email": {
+            "enabled": {
+                "name": "啟用",
+                "description": "啟用後向新使用者傳送歡迎郵件。"
+            },
+            "subject": {
+                "name": "郵件主題",
+                "description": "歡迎郵件的主題。"
+            },
+            "email_html": {
+                "name": "自定義郵件（HTML）",
+                "description": "自定義 HTML 郵件路徑。"
+            },
+            "email_text": {
+                "name": "自定義郵件（純文字）",
+                "description": "自定義純文字郵件路徑。"
+            }
+        },
+        "email_confirmation": {
+            "enabled": {
+                "name": "啟用"
+            },
+            "subject": {
+                "name": "郵件主題",
+                "description": "電子郵件確認郵件的主題。"
+            },
+            "email_html": {
+                "name": "自定義郵件（HTML）",
+                "description": "自定義 HTML 郵件路徑。"
+            },
+            "email_text": {
+                "name": "自定義郵件（純文字）",
+                "description": "自定義純文字郵件路徑。"
+            }
+        },
+        "user_expiry": {
+            "behaviour": {
+                "name": "處理方式",
+                "description": "帳戶到期時刪除使用者還是停用使用者。"
+            },
+            "delete_expired_after_days": {
+                "name": "到期後刪除帳戶（天）",
+                "description": "設定後，如果“處理方式”為“停用使用者”，帳戶會在到期後經過此天數被刪除。設為 0 可停用。"
+            },
+            "send_email": {
+                "name": "傳送訊息",
+                "description": "使用者帳戶到期時傳送郵件。"
+            },
+            "send_reminder_n_days_before": {
+                "name": "到期前 N 天傳送訊息",
+                "description": "在使用者帳戶到期前 N 天傳送訊息。可以設定多個時間點。"
+            },
+            "subject": {
+                "name": "郵件主題",
+                "description": "使用者到期郵件的主題。"
+            },
+            "email_html": {
+                "name": "自定義郵件（HTML）",
+                "description": "自定義 HTML 郵件路徑。"
+            },
+            "email_text": {
+                "name": "自定義郵件（純文字）",
+                "description": "自定義純文字郵件路徑。"
+            },
+            "adjustment_subject": {
+                "name": "調整：郵件主題",
+                "description": "調整郵件的主題；設定或延長到期時間時可選擇傳送。"
+            },
+            "adjustment_email_html": {
+                "name": "調整：自定義郵件（HTML）",
+                "description": "自定義 HTML 郵件路徑。"
+            },
+            "adjustment_email_text": {
+                "name": "調整：自定義郵件（純文字）",
+                "description": "自定義純文字郵件路徑。"
+            },
+            "reminder_subject": {
+                "name": "提醒：郵件主題",
+                "description": "到期提醒郵件的主題。"
+            },
+            "reminder_email_html": {
+                "name": "提醒：自定義郵件（HTML）",
+                "description": "自定義 HTML 郵件路徑。"
+            },
+            "reminder_email_text": {
+                "name": "提醒：自定義郵件（純文字）",
+                "description": "自定義純文字郵件路徑。"
+            }
+        },
+        "disable_enable": {
+            "subject_disabled": {
+                "name": "郵件主題（停用）",
+                "description": "帳戶停用郵件的主題。"
+            },
+            "subject_enabled": {
+                "name": "郵件主題（啟用）",
+                "description": "帳戶啟用郵件的主題。"
+            },
+            "disabled_html": {
+                "name": "自定義停用郵件（HTML）",
+                "description": "自定義 HTML 郵件路徑。"
+            },
+            "disabled_text": {
+                "name": "自定義停用郵件（純文字）",
+                "description": "自定義純文字郵件路徑。"
+            },
+            "enabled_html": {
+                "name": "自定義啟用郵件（HTML）",
+                "description": "自定義 HTML 郵件路徑。"
+            },
+            "enabled_text": {
+                "name": "自定義啟用郵件（純文字）",
+                "description": "自定義純文字郵件路徑。"
+            }
+        },
+        "deletion": {
+            "subject": {
+                "name": "郵件主題",
+                "description": "帳戶刪除郵件的主題。"
+            },
+            "email_html": {
+                "name": "自定義郵件（HTML）",
+                "description": "自定義 HTML 郵件路徑。"
+            },
+            "email_text": {
+                "name": "自定義郵件（純文字）",
+                "description": "自定義純文字郵件路徑。"
+            }
+        },
+        "webhooks": {
+            "created": {
+                "name": "使用者已建立",
+                "description": "透過 jfa-go 建立帳戶時要請求的 URL。會傳送 `respUser` 物件。"
+            }
+        },
+        "files": {
+            "invites": {
+                "name": "邀請儲存",
+                "description": "已儲存邀請的位置（json）。"
+            },
+            "password_resets": {
+                "name": "密碼重置",
+                "description": "已儲存的非 Jellyfin 密碼重置位置（json）。"
+            },
+            "emails": {
+                "name": "電子郵件位址",
+                "description": "已儲存電子郵件位址的位置（json）。"
+            },
+            "users": {
+                "name": "使用者儲存",
+                "description": "設定使用者到期時，用於臨時儲存使用者。"
+            },
+            "ombi_template": {
+                "name": "Ombi 使用者範本",
+                "description": "已儲存 Ombi 使用者範本的位置。"
+            },
+            "user_profiles": {
+                "name": "使用者設定檔",
+                "description": "已儲存使用者設定檔的位置（包含範本、設定和顯示偏好）（json）。"
+            },
+            "html_templates": {
+                "name": "自定義 HTML 範本目錄",
+                "description": "包含自定義 Web UI 頁面版本的目錄路徑。更多資訊請參考 wiki。"
+            },
+            "lang_files": {
+                "name": "自定義語言檔案目錄",
+                "description": "目錄路徑，其結構需與內部 “lang/” 目錄一致。更多資訊請參考 GitHub。"
+            },
+            "custom_emails": {
+                "name": "自定義郵件內容",
+                "description": "程式在設定中產生的 JSON 檔案，不同於 email_html/email_text。更多資訊請參考 wiki。"
+            },
+            "custom_user_page_content": {
+                "name": "自定義使用者頁面內容",
+                "description": "程式在設定中產生的 JSON 檔案，包含使用者頁面訊息。更多資訊請參考 wiki。"
+            },
+            "telegram_users": {
+                "name": "Telegram 使用者",
+                "description": "儲存 Telegram 使用者 ID 和語言偏好。"
+            },
+            "matrix_users": {
+                "name": "Matrix 使用者",
+                "description": "儲存 Matrix 使用者 ID 和語言偏好。"
+            },
+            "matrix_sql": {
+                "name": "Matrix 加密資料庫",
+                "description": "儲存 Matrix 端到端加密所需的加密材料。"
+            },
+            "discord_users": {
+                "name": "Discord 使用者",
+                "description": "儲存 Discord 使用者 ID 和語言偏好。"
+            },
+            "announcements": {
+                "name": "公告範本",
+                "description": "儲存自定義公告範本。"
+            }
+        }
+    },
+    "options": {
+        "updates": {
+            "channel": {
+                "stable": "穩定版",
+                "unstable": "不穩定版"
+            }
+        },
+        "jellyfin": {
+            "type": {
+                "jellyfin": "Jellyfin",
+                "emby": "Emby"
+            }
+        },
+        "ui": {
+            "language-form": {
+                "en-us": "英語（美國）"
+            },
+            "language-admin": {
+                "en-us": "英語（美國）"
+            },
+            "theme": {
+                "Jellyfin (Dark)": "Jellyfin（深色）",
+                "Default (Light)": "預設（淺色）"
+            },
+            "login_appearance": {
+                "clear": "透明",
+                "opaque": "不透明"
+            }
+        },
+        "advanced": {
+            "proxy_protocol": {
+                "http": "HTTP",
+                "socks": "SOCKS5"
+            },
+            "debug_log_emails": {
+                "none": "無",
+                "all": "所有寫入",
+                "deletion": "僅刪除*"
+            },
+            "debug_log_discord": {
+                "none": "無",
+                "all": "所有寫入",
+                "deletion": "僅刪除*"
+            },
+            "debug_log_telegram": {
+                "none": "無",
+                "all": "所有寫入",
+                "deletion": "僅刪除*"
+            },
+            "debug_log_matrix": {
+                "none": "無",
+                "all": "所有寫入",
+                "deletion": "僅刪除*"
+            },
+            "debug_log_invites": {
+                "none": "無",
+                "all": "所有寫入",
+                "deletion": "僅刪除*"
+            },
+            "debug_log_announcements": {
+                "none": "無",
+                "all": "所有寫入",
+                "deletion": "僅刪除*"
+            },
+            "debug_log_expiries": {
+                "none": "無",
+                "all": "所有寫入",
+                "deletion": "僅刪除*"
+            },
+            "debug_log_profiles": {
+                "none": "無",
+                "all": "所有寫入",
+                "deletion": "僅刪除*"
+            },
+            "debug_log_custom_content": {
+                "none": "無",
+                "all": "所有寫入",
+                "deletion": "僅刪除*"
+            }
+        },
+        "email": {
+            "language": {
+                "en-us": "英語（美國）"
+            },
+            "method": {
+                "": "已停用",
+                "smtp": "SMTP",
+                "mailgun": "Mailgun"
+            }
+        },
+        "smtp": {
+            "encryption": {
+                "ssl_tls": "SSL/TLS",
+                "starttls": "STARTTLS",
+                "none": "無（僅限本地使用！）"
+            },
+            "auth_type": {
+                "0": "明文",
+                "1": "登入",
+                "2": "CRAM-MD5",
+                "3": "無",
+                "4": "自動"
+            }
+        },
+        "discord": {
+            "apply_role": {
+                "": "無"
+            },
+            "language": {
+                "en-us": "英語（美國）"
+            }
+        },
+        "telegram": {
+            "language": {
+                "en-us": "英語（美國）"
+            }
+        },
+        "matrix": {
+            "language": {
+                "en-us": "英語（美國）"
+            }
+        },
+        "password_resets": {
+            "language": {
+                "en-us": "英語（美國）"
+            }
+        },
+        "user_expiry": {
+            "behaviour": {
+                "delete_user": "刪除使用者",
+                "disable_user": "停用使用者"
+            }
+        }
+    }
+}

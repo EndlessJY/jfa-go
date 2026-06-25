@@ -2,7 +2,7 @@
 <html lang="{{ .shortLang }}" dir="{{ .pageDirection }}" class="{{ .cssClass }}">
     <head>
         {{ template "syntaxhighlighting.txt" . }}
-        <title>Admin - jfa-go</title>
+        <title>{{ .strings.admin }} - jfa-go</title>
         {{ template "header.txt" . }}
         <script>
             window.usernameEnabled = {{ .username }};
@@ -46,13 +46,13 @@
                 <p>{{ .strings.builtBy }} <span class="text-black dark:text-white font-mono bg-inherit">{{ .builtBy }}</span></p>
                 <p>{{ .strings.buildTags }} <span class="text-black dark:text-white font-mono bg-inherit">{{ .buildTags }}</span></p>
                 <div class="flex flex-row flex-wrap gap-2">
-                    <a class="button ~neutral lang-link flex flex-row gap-2" href="https://github.com/hrfee/jfa-go"><i class="ri-github-line"></i>github</a>
+                    <a class="button ~neutral lang-link flex flex-row gap-2" href="https://github.com/EndlessJY/jfa-go"><i class="ri-github-line"></i>github</a>
                     <a class="button ~urge lang-link" href="https://wiki.jfa-go.com">wiki/docs</a>
-                    <a class="button ~positive lang-link" href="https://weblate.jfa-go.com">translation</a>
+                    <a class="button ~positive lang-link" href="https://weblate.jfa-go.com">{{ .strings.translation }}</a>
                     <div class="dropdown" tabindex="0">
                         <a href="https://github.com/sponsors/hrfee" target="_blank" class="button ~info dropdown-button lang-link flex flex-row gap-2">
                             <i class="ri-hand-heart-line"></i>
-                            donate
+                            {{ .strings.donate }}
                             <span class="chev"></span>
                         </a>
                         <div class="dropdown-display">
@@ -64,7 +64,7 @@
                     </div>
                     <a class="button ~urge @low discord lang-link flex flex-row gap-2" href="https://discord.com/invite/MrtvuQmyhP" target="_blank"><i class="ri-discord-line"></i>discord</a>
                 </div>
-                <p><a href="https://github.com/hrfee/jfa-go/blob/main/LICENSE">Available under the MIT License. Font "Hanken Grotesk" available under SIL OFL 1.1 License.</a></p>
+                <p><a href="https://github.com/EndlessJY/jfa-go/blob/main/LICENSE">{{ .strings.licenseNotice }}</a></p>
                 <pre class="font-mono bg-inherit force-ltr">{{ .license }}</pre>
             </div>
         </div>
@@ -623,7 +623,7 @@
                                     <p class="support">{{ .strings.userExpiryDescription }}</p>
                                     <div>
                                         <label for="create-user-expiry-enabled" class="button ~neutral @low flex flex-row gap-2">
-                                            <input type="checkbox" id="create-user-expiry-enabled" aria-label="User duration enabled">
+                                            <input type="checkbox" id="create-user-expiry-enabled" aria-label="{{ .strings.userExpiry }} {{ .strings.enabled }}">
                                             <span>{{ .strings.enabled }} </span>
                                         </label>
                                     </div>
@@ -683,9 +683,9 @@
                                     <label class="label supra" for="create-uses">{{ .strings.inviteNumberOfUses }}</label>
                                     <div class="flex flex-row gap-2">
                                         <input type="number" min="0" id="create-uses" class="input ~neutral @low" value=1>
-                                        <label for="create-inf-uses" class="button ~neutral @low" title="Set uses to infinite">
+                                        <label for="create-inf-uses" class="button ~neutral @low" title="{{ .strings.inviteInfiniteUsesWarning }}">
                                             <span>&infin;</span>
-                                            <input type="checkbox" class="unfocused" id="create-inf-uses" aria-label="Set uses to infinite">
+                                            <input type="checkbox" class="unfocused" id="create-inf-uses" aria-label="{{ .strings.inviteInfiniteUsesWarning }}">
                                         </label>
                                     </div>
                                 </div>
@@ -882,7 +882,7 @@
                         <div class="flex flex-row align-middle justify-between md:justify-normal gap-2">
                             <span class="heading">{{ .strings.settings }}</span>
                             <label for="settings-advanced-enabled" class="button ~neutral @low flex flex-row gap-2">
-                                <input type="checkbox" id="settings-advanced-enabled" aria-label="Advanced settings enabled">
+                                <input type="checkbox" id="settings-advanced-enabled" aria-label="{{ .strings.advancedSettings }}">
                                 <span>{{ .strings.advancedSettings }} </span>
                             </label>
                         </div>

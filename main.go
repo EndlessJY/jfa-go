@@ -730,7 +730,7 @@ func flagPassed(name string) (found bool) {
 // @contact.name Harvey Tindall
 // @contact.email hrfee@hrfee.dev
 // @license.name MIT
-// @license.url https://raw.githubusercontent.com/hrfee/jfa-go/main/LICENSE
+// @license.url https://raw.githubusercontent.com/EndlessJY/jfa-go/main/LICENSE
 // @BasePath /
 
 // @securityDefinitions.apikey Bearer

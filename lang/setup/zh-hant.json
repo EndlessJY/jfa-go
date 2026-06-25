@@ -1,152 +1,180 @@
 {
     "meta": {
-        "name": "繁體中文 (TW)"
+        "name": "繁體中文"
     },
     "strings": {
-        "pageTitle": "設置 - jfa-go",
+        "pageTitle": "設定 - jfa-go",
         "next": "下一步",
         "back": "上一步",
-        "optional": "可選的",
-        "serverType": "伺服器類型",
-        "disabled": "已禁用",
+        "optional": "可選",
+        "serverType": "伺服器型別",
+        "disabled": "停用",
         "enabled": "已啟用",
-        "port": "通訊埠",
-        "message": "訊息",
-        "serverAddress": "伺服器地址",
-        "emailSubject": "電子郵件主題",
-        "URL": "網址",
-        "apiKey": "API密鑰",
-        "errorInvalidUserPass": "無效的帳戶名稱/密碼。",
-        "errorNotAdmin": "此帳戶不允許管理伺服器。",
-        "errorUserDisabled": "此帳戶可能已被禁用。",
-        "error404": "404, 請檢查內部網址(internal URL)。",
-        "errorConnectionRefused": "連線遭拒。",
+        "port": "連接埠",
+        "message": "資訊",
+        "serverAddress": "伺服器位址",
+        "emailSubject": "郵件主題",
+        "URL": "URL",
+        "apiKey": "API 金鑰",
         "error": "錯誤",
-        "errorUnknown": "未知錯誤，請檢查日誌。"
+        "errorInvalidUserPass": "無效的使用者名稱/密碼。",
+        "errorNotAdmin": "使用者沒有許可權管理伺服器。",
+        "errorUserDisabled": "該使用者可能已被停用。",
+        "error404": "404，請檢查內部 URL。",
+        "errorConnectionRefused": "連線被拒絕。",
+        "errorUnknown": "未知錯誤，請檢查套用程式記錄。",
+        "errorProxy": "代理設定無效。"
     },
     "startPage": {
         "welcome": "歡迎！",
-        "pressStart": "您需要完成幾個步驟來設置jfa-go。點擊 開始 以繼續。",
-        "httpsNotice": "請確保您通過 HTTPS 或專用網路訪問此頁面。",
+        "pressStart": "需要完成幾個步驟來設定 jfa-go。按一下開始繼續。",
+        "httpsNotice": "請確保僅透過 HTTPS 或專用網路存取此頁面。",
         "start": "開始"
     },
     "endPage": {
-        "finished": "已完成！",
-        "restartMessage": "您可以設置Discord/Telegram/Matrix機器人，在“設置”中自定義您的訊息和其他內容。點擊下方重新啟動，然後重整頁面。",
+        "finished": "完成！",
+        "moreFeatures": "Discord、Telegram、Matrix 機器人和自定義 Markdown 訊息等更多功能都可以在“設定”中找到，建議完成後再瀏覽一遍。",
+        "restartReload": "按一下下方按鈕重啟，然後透過顯示的內部或外部地址存取 jfa-go。",
+        "ifFailedLoad": "如果頁面無法載入，請檢查套用記錄以瞭解原因。",
         "refreshPage": "重新整理"
     },
     "language": {
         "title": "語言",
-        "description": "jfa-go 的大部分內容都仰賴社群翻譯。您可以選擇下面的預設語言，但使用者仍然可以根據需要進行更改。如果您想改進翻譯，請在 {n} 註冊以開始貢獻您的一份力量！",
+        "description": "jfa-go 的大部分內容都有社群翻譯。你可以在下面選擇預設語言，使用者也可以按需自行變更。如果你想幫助翻譯，請在 {n} 註冊並開始貢獻。",
         "defaultAdminLang": "預設管理語言",
-        "defaultFormLang": "預設帳戶創建語言",
+        "defaultFormLang": "預設帳號建立語言",
         "defaultEmailLang": "預設電子郵件語言"
     },
     "general": {
-        "title": "一般",
-        "listenAddress": "監聽埠",
-        "urlBase": "基底URL",
-        "urlBaseNotice": "只有在子網域上使用反向代理時才需要（例如“jellyf.in/accounts”）。",
+        "title": "常規",
+        "listenAddress": "監聽位址",
+        "urlBase": "URL Base",
+        "urlBaseNotice": "僅在透過反向代理的子路徑存取時需要，例如“jellyf.in/accounts”。",
+        "externalURL": "外部 jfa-go URL",
+        "externalURLNotice": "你將用來存取 jfa-go 的 URL。它會用於產生密碼重置等連結。如果設定了上面的 URL Base，請確保這裡也包含它。",
         "lightTheme": "明亮",
-        "darkTheme": "黑暗",
-        "useHTTPS": "使用HTTPS",
-        "httpsPort": "HTTPS 通訊埠",
-        "useHTTPSNotice": "只有在您不使用反向代理時才推薦使用。",
-        "pathToCertificate": "證書文件路徑",
-        "pathToKeyFile": "密鑰文件路徑"
+        "darkTheme": "暗黑",
+        "useHTTPS": "使用 HTTPS",
+        "httpsPort": "HTTPS 連接埠",
+        "useHTTPSNotice": "僅在不使用反向代理時推薦使用。",
+        "pathToCertificate": "證書檔案路徑",
+        "pathToKeyFile": "金鑰檔案路徑"
     },
     "updates": {
         "title": "更新",
-        "description": "啟用此選項可在有新更新可用時收到通知。jfa-go 每 30 分鐘將對 {n} 檢查一次。不會收集任何IP或個人身份資訊。",
-        "updateChannel": "更新頻道",
+        "description": "啟用後，jfa-go 會每 30 分鐘檢查 {n}，並在有新更新時通知你。不會收集 IP 或個人身分資訊。",
+        "updateChannel": "更新通道",
         "stable": "穩定版",
-        "unstable": "非穩定版"
+        "unstable": "不穩定版"
+    },
+    "proxy": {
+        "title": "代理",
+        "description": "讓 jfa-go 透過 HTTP/SOCKS5 代理進行所有連線。連線 Jellyfin 時也會透過此代理測試。",
+        "protocol": "協議",
+        "address": "地址（包括連接埠）"
     },
     "login": {
-        "title": "登錄",
-        "description": "要存取管理頁面，您需要使用以下方法登錄：",
-        "authorizeWithJellyfin": "使用Jellyfin/Emby授權：登錄詳細資訊與Jellyfin共用，允許使用多個帳戶。",
-        "authorizeManual": "帳戶名稱和密碼：手動設置帳戶名稱和密碼。",
-        "adminOnly": "僅限管理員帳戶(推薦)",
-        "allowAll": "允許所有Jellyfin帳戶登錄",
-        "allowAllDescription": "不建議，您應該允許個別使用者在登錄后設置。",
-        "emailNotice": "您的電子郵件地址可用於接收通知。"
+        "title": "登入",
+        "description": "要存取管理頁面，您需要使用以下方法登入：",
+        "authorizeWithJellyfin": "使用 Jellyfin/Emby 授權：登入資訊與 Jellyfin 共享，支援多個使用者。",
+        "authorizeManual": "使用者名稱和密碼：手動設定登入使用者名稱和密碼。",
+        "adminOnly": "僅管理員使用者（推薦）",
+        "allowAll": "允許所有 Jellyfin 使用者登入",
+        "allowAllDescription": "不推薦。建議在設定完成後，只允許指定使用者登入。",
+        "authorizeManualUserPageNotice": "使用此選項將停用“使用者頁面”功能。",
+        "emailNotice": "您的電子郵件位址可以用來接收通知。"
     },
     "jellyfinEmby": {
         "title": "Jellyfin/Emby",
-        "description": "需要管理員帳戶，因為 API 不允許使用 API 金鑰創建帳戶。您應該創建一個單獨的帳戶並選取「 允許此使用者管理伺服器」。您可以關閉其他所有內容。完成後，在此處輸入登錄詳細資訊。",
-        "embyNotice": "對 Emby 提供有限支持，不支持密碼重置功能。",
+        "description": "由於 API 不允許使用 API 金鑰建立使用者，因此需要管理員帳號。建議建立一個單獨帳號，勾選“允許此使用者管理伺服器”，並停用其他許可權。完成後，在這裡輸入登入資訊。",
+        "embyNotice": "Emby 支援有限，且不支援密碼重置。",
         "internal": "內部",
         "external": "外部",
-        "replaceJellyfin": "伺服器名稱",
-        "replaceJellyfinNotice": "如果填寫，則替換應用程式中出現的所有 'Jellyfin' 字樣。",
+        "replaceJellyfin": "服務名稱",
+        "replaceJellyfinNotice": "填寫後，套用中出現的“Jellyfin”都會替換為該名稱。",
         "addressExternalNotice": "留空以使用相同的地址。",
-        "testConnection": "測試連接"
+        "testConnection": "測試連線"
     },
     "ombi": {
         "title": "Ombi",
-        "description": "通過連接到 Ombi，當使用者通過 jfa-go 加入時，將創建 Jellyfin 和 Ombi 帳戶。設置完成後，轉到 “設置” 為新的 ombi 帳戶設置預設配置檔。",
-        "apiKeyNotice": "在 Ombi “設置”的第一個選項卡中找到它。"
+        "description": "連線 Ombi 後，使用者透過 jfa-go 加入時會同時建立 Jellyfin 和 Ombi 帳號。設定完成後，請前往“設定”為新的 Ombi 使用者設定預設設定檔。",
+        "apiKeyNotice": "在Ombi設定的第一個選項卡中找到這個選項。",
+        "stabilityWarning": "警告：Ombi 整合仍不穩定，可能導致問題。建議改用 Jellyseerr。更多資訊見 {n}。"
+    },
+    "jellyseerr": {
+        "title": "Jellyseerr",
+        "description": "Jellyseerr 是 Ombi 的替代方案，並且與 jfa-go 的整合更好。設定完成後，請前往“設定”建立設定檔，並為新的 Jellyseerr 帳號新增範本。",
+        "importExisting": "匯入現有使用者",
+        "importExistingDescription": "啟用後，現有使用者的聯絡資訊和偏好設定會從 jfa-go 同步。"
     },
     "messages": {
         "title": "訊息",
-        "description": "jfa-go 可以通過電子郵件、Discord、Telegram 和/或 Matrix 發送密碼重置和各種消息。您可以在下面設置電子郵件，其他電子郵件可以稍後在「設置」中進行配置。說明可以在 {n} 上找到。如果不需要此功能，可以在此處禁用這些功能。"
+        "description": "jfa-go 可以透過電子郵件、Discord、Telegram 和/或 Matrix 傳送密碼重置和各種訊息。你可以先在下面設定電子郵件，其他渠道稍後可在“設定”中設定。說明見 {n}。如果不需要，可以在這裡停用這些功能。"
     },
     "email": {
         "title": "電子郵件",
-        "description": "jfa-go 可以通過電子郵件發送密碼重置PIN和各種通知。您可以連接到 SMTP 伺服器，或使用 {n} API。",
-        "method": "發送方式",
-        "useEmailAsUsername": "使用電子郵件地址作為使用者名稱",
-        "useEmailAsUsernameNotice": "如果啟用，新使用者將使用他們的電子郵件地址而不是帳戶名稱登錄Jellyfin/Emby。",
-        "fromAddress": "寄件者地址",
-        "senderName": "寄件者名稱",
+        "description": "jfa-go 可以透過電子郵件傳送密碼重置 PIN 碼和各種通知。你可以連線 SMTP 伺服器，或使用 {n} API。",
+        "method": "傳送方式",
+        "useEmailAsUsername": "使用電子郵件位址作為使用者名稱",
+        "useEmailAsUsernameNotice": "啟用後，新使用者將使用電子郵件位址而不是使用者名稱登入 Jellyfin/Emby。",
+        "fromAddress": "發件人地址",
+        "senderName": "發件人姓名",
         "dateFormat": "日期格式",
-        "dateFormatNotice": "日期遵循 strftime 格式。有關詳細資訊，請訪問 {n}。",
+        "dateFormatNotice": "日期遵循 strftime 格式。如需更多資訊，請存取 {n}。",
         "encryption": "加密",
         "mailgunApiURL": "API URL"
     },
     "notifications": {
         "title": "管理員通知",
-        "description": "如果啟用，您可以選擇（每個邀請）在邀請過期或創建帳戶時接收消息。如果您沒有選擇 Jellyfin 登錄方式，請確保您提供了電子郵件地址，或稍後添加其他聯繫方式。"
+        "description": "啟用後，你可以按邀請選擇在邀請過期或使用者建立時接收通知。如果未選擇 Jellyfin 登入方式，請確保已提供電子郵件位址，或稍後新增其他聯絡方式。"
+    },
+    "userPage": {
+        "title": "使用者頁面",
+        "description": "使用者頁面（顯示為“我的帳號”）允許使用者存取有關他們帳號的資訊，如其聯絡方式和帳號過期日期。他們還可以變更密碼、啟動密碼重置，並在無需詢問您的情況下連結/變更聯絡方式。此外，使用者還可以在登入前後看到自定義的Markdown訊息。",
+        "customizeMessages": "在設定中，單擊“使用者頁面”旁邊的編輯按鈕以稍後進行設定。",
+        "requiredSettings": "必須透過 Jellyfin 登入到 jfa-go。若要啟用使用者自助密碼重置，請稍後選擇“透過連結重置密碼”。"
     },
     "welcomeEmails": {
         "title": "歡迎訊息",
-        "description": "如果啟用，將向新帳戶發送一條消息，其中包含 Jellyfin/Emby URL 及其帳戶名稱。"
+        "description": "如果啟用，將向新使用者傳送帶有 Jellyfin/Emby URL 及其使用者名稱的訊息。"
     },
     "inviteEmails": {
-        "title": "邀請通知",
-        "description": "如果啟用，您可以直接向使用者的電子郵件、Discord 或 Matrix 帳戶發送邀請。由於您可能使用的是反向代理，因此需要提供從中訪問邀請的URL。寫下您的 URL 庫，並附加 “/invite”。"
+        "title": "邀請訊息",
+        "description": "啟用後，可以直接向使用者的電子郵件位址、Discord 或 Matrix 使用者傳送邀請。由於你可能正在使用反向代理，需要提供存取邀請的 URL。請填寫 URL Base，並追加“/invite”。"
     },
     "passwordResets": {
         "title": "重置密碼",
-        "description": "當用戶嘗試重置密碼時，Jellyfin 會創建一個名為 “passwordreset-*.json” 的檔，其中包含一個 PIN 碼。jfa-go 讀取該文件並將 PIN 碼發送給使用者。",
-        "pathToJellyfin": "Jellyfin 配置目錄的路徑",
-        "pathToJellyfinNotice": "如果您不知道它在哪裡，請嘗試在Jellyfin中重置密碼。將出現一個帶有 “<path to jellyfin>/passwordreset-*.json” 的彈出視窗。",
-        "resetLinks": "發送連結而不是 PIN 碼",
-        "resetLinksNotice": "如果啟用了 Ombi 集成，請使用此選項將 Jellyfin 密碼重置與 Ombi 同步。",
+        "description": "當使用者嘗試重置密碼時，Jellyfin 會建立名為“passwordreset-*.json”的檔案，其中包含 PIN 碼。jfa-go 會讀取該檔案並將 PIN 碼傳送給使用者。如果啟用了“使用者頁面”，也可以透過使用者名稱、電子郵件或聯絡方式在那裡發起重置。",
+        "moreInfo": "有關不同密碼重置方式的更多資訊，請檢視 {n}。",
+        "pathToJellyfin": "Jellyfin 設定目錄的路徑",
+        "pathToJellyfinNotice": "如果不確定目錄位置，可以嘗試在 Jellyfin 中重置密碼。彈窗中會出現“<path to jellyfin>/passwordreset-*.json”。如果只想透過“使用者頁面”使用自助密碼重置，則不需要填寫。",
+        "resetLinks": "傳送連結而不是PIN 碼",
+        "resetLinksRequiredForUserPage": "對於使用者頁面上的自助密碼重置，這是必需的。",
+        "resetLinksNotice": "如果啟用了 Ombi 整合，請使用它與 Ombi 同步 Jellyfin 密碼重置。",
         "resetLinksLanguage": "預設重置連結語言",
-        "setPassword": "通過連結設置密碼",
-        "setPasswordNotice": "啟用此功能意味著使用者不必在重置後從 PIN 更改其密碼。並將強制執行密碼驗證。"
+        "setPassword": "透過連結設定密碼",
+        "setPasswordNotice": "啟用此功能意味著使用者無需在重置後透過 PIN 變更其密碼。並將強制執行密碼驗證。"
     },
     "passwordValidation": {
         "title": "密碼驗證",
-        "description": "如果啟用，帳戶創建頁面上將顯示一組密碼要求，例如最小長度、大寫/小寫字元等。",
+        "description": "啟用後，帳號建立頁面會顯示一組密碼要求，例如最小長度、大寫/小寫字母數量等。",
         "length": "長度",
-        "uppercase": "大寫字元",
-        "lowercase": "小寫字元",
+        "uppercase": "大寫字母",
+        "lowercase": "小寫字母",
         "numbers": "數字",
         "special": "特殊字元（%、* 等）"
     },
     "helpMessages": {
-        "title": "幫助訊息",
-        "description": "這些訊息將顯示在帳戶創建頁面和某些電子郵件中。",
-        "contactMessage": "聯繫方式",
-        "contactMessageNotice": "顯示在除管理員之外的所有頁面的底部。",
-        "helpMessage": "幫助訊息",
-        "helpMessageNotice": "顯示在帳戶創建頁面上。",
-        "successMessage": "成功訊息",
-        "successMessageNotice": "在使用者創建其帳戶時顯示。",
-        "emailMessage": "電子郵件訊息",
+        "title": "幫助資訊",
+        "description": "這些訊息將顯示在帳號建立頁面和某些電子郵件中。",
+        "markdownMessageNotice": "部分郵件、頁面和訊息內容可以稍後在“設定”中使用 Markdown 進一步自定義。",
+        "contactMessage": "聯絡方式",
+        "contactMessageNotice": "顯示在除管理頁面以外的所有頁面底部。",
+        "helpMessage": "幫助資訊",
+        "helpMessageNotice": "顯示在帳號建立頁面上。",
+        "successMessage": "成功資訊",
+        "successMessageNotice": "在使用者建立帳號時顯示。",
+        "emailMessage": "電子郵件",
         "emailMessageNotice": "顯示在電子郵件的底部。"
     }
 }

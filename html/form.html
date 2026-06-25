@@ -84,21 +84,21 @@
                             {{ if or (.telegramEnabled) (or .discordEnabled .matrixEnabled) }}
                             <div id="contact-via" class="unfocused flex flex-col gap-2">
                                 <label class="flex flex-row gap-2 switch unfocused">
-                                    <input type="checkbox" name="contact-via" value="email" id="contact-via-email"><span>Contact through Email</span>
+                                    <input type="checkbox" name="contact-via" value="email" id="contact-via-email"><span>{{ .strings.contactThrough }} {{ .strings.emailAddress }}</span>
                                 </label>
                                 {{ if .telegramEnabled }}
                                 <label class="flex flex-row gap-2 switch unfocused">
-                                    <input type="checkbox" name="contact-via" value="telegram" id="contact-via-telegram"><span>Contact through Telegram</span>
+                                    <input type="checkbox" name="contact-via" value="telegram" id="contact-via-telegram"><span>{{ .strings.contactThrough }} Telegram</span>
                                 </label>
                                 {{ end }}
                                 {{ if .discordEnabled }}
                                 <label class="flex flex-row gap-2 switch unfocused">
-                                    <input type="checkbox" name="contact-via" value="discord" id="contact-via-discord"><span>Contact through Discord</span>
+                                    <input type="checkbox" name="contact-via" value="discord" id="contact-via-discord"><span>{{ .strings.contactThrough }} Discord</span>
                                 </label>
                                 {{ end }}
                                 {{ if .matrixEnabled }}
                                 <label class="flex flex-row gap-2 switch unfocused">
-                                    <input type="checkbox" name="contact-via" value="matrix" id="contact-via-matrix"><span>Contact through Matrix</span>
+                                    <input type="checkbox" name="contact-via" value="matrix" id="contact-via-matrix"><span>{{ .strings.contactThrough }} Matrix</span>
                                 </label>
                                 {{ end }}
                             </div>

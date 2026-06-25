@@ -57,7 +57,7 @@ class profile implements Profile {
         if (state) {
             this._adminChip.classList.remove("unfocused");
             this._adminChip.classList.add("chip", "~info");
-            this._adminChip.textContent = "Admin";
+            this._adminChip.textContent = window.lang.strings("admin");
         } else {
             this._adminChip.classList.add("unfocused");
             this._adminChip.classList.remove("chip", "~info");

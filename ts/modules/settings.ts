@@ -1476,7 +1476,8 @@ export class settingsList implements AsTab {
             this._loader.children[i].classList.add("invisible");
         }
         addLoader(this._loader, false, true);
-        _get("/config", null, (req: XMLHttpRequest) => {
+        const configURL = window.language ? `/config?lang=${encodeURIComponent(window.language)}` : "/config";
+        _get(configURL, null, (req: XMLHttpRequest) => {
             if (req.readyState != 4) return;
             if (req.status != 200) {
                 window.notifications.customError("settingsLoadError", window.lang.notif("errorLoadSettings"));

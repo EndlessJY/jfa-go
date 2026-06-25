@@ -1,6 +1,6 @@
 ![jfa-go](images/banner.svg)
-[![Build Status](https://ci.hrfee.dev/api/badges/3/status.svg)](https://ci.hrfee.dev/repos/3)
-[![Docker Hub](https://img.shields.io/docker/pulls/hrfee/jfa-go?label=docker)](https://hub.docker.com/r/hrfee/jfa-go)
+[![Docker image](https://github.com/EndlessJY/jfa-go/actions/workflows/docker.yml/badge.svg)](https://github.com/EndlessJY/jfa-go/actions/workflows/docker.yml)
+[![GHCR](https://img.shields.io/badge/container-ghcr.io%2Fendlessjy%2Fjfa--go-blue)](https://github.com/EndlessJY/jfa-go/pkgs/container/jfa-go)
 [![Translation status](https://weblate.jfa-go.com/widgets/jfa-go/-/svg-badge.svg)](https://weblate.jfa-go.com/engage/jfa-go/)
 [![Docs/Wiki](https://img.shields.io/static/v1?label=documentation&message=jfa-go.com&color=informational)](https://wiki.jfa-go.com)
 [![Discord](https://img.shields.io/discord/922842034170122321?color=%235865F2&label=discord)](https://discord.com/invite/MrtvuQmyhP)
@@ -50,7 +50,7 @@ jfa-go is a user management app for [Jellyfin](https://github.com/jellyfin/jelly
 
 `MatrixE2EE` builds (and Linux `TrayIcon` builds) include support for end-to-end encryption for the Matrix bot, but require the `libolm(-dev)` dependency. `.deb/.rpm/.apk` packages list this dependency, and docker images include it.
 
-##### [Docker](https://hub.docker.com/r/hrfee/jfa-go)
+##### [Docker](https://github.com/EndlessJY/jfa-go/pkgs/container/jfa-go)
 ```sh
 docker create \
              --name "jfa-go" \ # Whatever you want to name it
@@ -59,7 +59,7 @@ docker create \
              -v /path/to/.config/jfa-go:/data \ # Path to wherever you want to store the config file and other data
              -v /path/to/jellyfin:/jf \ # Only needed for password resets through Jellyfin, ignore if not using or using Emby
              -v /etc/localtime:/etc/localtime:ro \ # Makes sure time is correct
-             hrfee/jfa-go # hrfee/jfa-go:unstable for latest build from git
+             ghcr.io/endlessjy/jfa-go # ghcr.io/endlessjy/jfa-go:unstable for latest build from git
 ```
 
 ##### [Debian/Ubuntu](https://apt.hrfee.dev)
@@ -92,7 +92,7 @@ Available on the AUR as:
 
 ##### Other platforms
 Download precompiled binaries from:
- * [The releases section](https://github.com/hrfee/jfa-go/releases) (stable)
+ * [The releases section](https://github.com/EndlessJY/jfa-go/releases) (stable)
  * [dl.jfa-go.com](https://dl.jfa-go.com) (nightly)
 
 unzip the `jfa-go`/`jfa-go.exe` executable to somewhere useful.

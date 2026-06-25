@@ -1,0 +1,1238 @@
+{
+  "groups": {
+    "external_services": {
+      "name": "集成",
+      "description": "与外部服务集成相关的设置。"
+    },
+    "email": {
+      "name": "邮件",
+      "description": "通过 jfa-go 发送邮件的相关设置。"
+    },
+    "chatbots": {
+      "name": "聊天机器人",
+      "description": "通过聊天服务发送消息的相关设置。"
+    },
+    "sign_up": {
+      "name": "邀请与推荐",
+      "description": "与邀请、注册页面和用户推荐相关的设置。"
+    },
+    "accounts": {
+      "name": "账户",
+      "description": "与账户管理相关的设置。"
+    }
+  },
+  "sections": {
+    "updates": {
+      "name": "更新",
+      "description": "更新通知和发布通道相关设置。"
+    },
+    "jellyfin": {
+      "name": "Jellyfin",
+      "description": "连接 Jellyfin 的相关设置。"
+    },
+    "ui": {
+      "name": "通用",
+      "description": "界面和程序功能相关设置。"
+    },
+    "url_paths": {
+      "name": "URL 路径",
+      "description": "用于修改不同页面访问路径的设置。如果修改后忘记了路径，启动日志中会打印这些路径。路径应以斜杠开头，但不要以斜杠结尾。"
+    },
+    "advanced": {
+      "name": "高级",
+      "description": "高级设置。"
+    },
+    "activity_log": {
+      "name": "活动日志",
+      "description": "活动日志数据保留相关设置。"
+    },
+    "captcha": {
+      "name": "验证码",
+      "description": "账户创建验证码相关设置。"
+    },
+    "user_page": {
+      "name": "用户页面/“我的账户”",
+      "description": "用户页面（我的账户）允许用户直接访问和修改个人信息，例如更改或添加联系方式、查看到期日期、发送推荐邀请，或修改密码。只要提供联系方式或用户名，也可以从这里发起密码重置。“通用”中的访问控制设置不适用于此页面，“账户”标签页中的“访问 jfa-go”也不适用于此页面。"
+    },
+    "password_validation": {
+      "name": "密码校验",
+      "description": "密码校验规则（最小长度等）。"
+    },
+    "messages": {
+      "name": "消息/通知",
+      "description": "邮件和消息的通用设置。"
+    },
+    "email": {
+      "name": "邮件",
+      "description": "邮件通用设置。"
+    },
+    "mailgun": {
+      "name": "Mailgun",
+      "description": "Mailgun API 连接设置。"
+    },
+    "smtp": {
+      "name": "SMTP",
+      "description": "SMTP 服务器连接设置。"
+    },
+    "discord": {
+      "name": "Discord",
+      "description": "Discord 邀请、注册和通知相关设置。"
+    },
+    "telegram": {
+      "name": "Telegram",
+      "description": "Telegram 注册和通知相关设置。配置方法请参考 jfa-go wiki。"
+    },
+    "matrix": {
+      "name": "Matrix",
+      "description": "Matrix 邀请、注册和通知相关设置。配置方法请参考 jfa-go wiki。"
+    },
+    "password_resets": {
+      "name": "密码重置",
+      "description": "密码重置处理器相关设置。"
+    },
+    "invite_emails": {
+      "name": "邀请消息",
+      "description": "直接向用户发送邀请的相关设置。"
+    },
+    "template_email": {
+      "name": "自定义邮件模板",
+      "description": "公告和自定义消息所用模板的设置。HTML 模板应包含 {{ .text }}，纯文本模板应包含 {{ .plaintext }}；两者都可以包含 {{ .message }} 来插入联系信息。"
+    },
+    "notifications": {
+      "name": "管理员通知",
+      "description": "允许按邀请单独开关发送给管理员的“用户已创建”和“邀请已过期”通知。"
+    },
+    "ombi": {
+      "name": "Ombi",
+      "description": "连接 Ombi 后，可在新用户注册时自动创建 Ombi 和 Jellyfin 账户。需要将 Ombi 模板添加到已有用户配置文件中，账户才会被创建；你可以刷新后在“设置 > 用户配置文件”中检查。若要同时处理 Ombi 和 Jellyfin 的密码重置，请启用“使用重置链接而不是 PIN”。"
+    },
+    "jellyseerr": {
+      "name": "Jellyseerr",
+      "description": "连接 Jellyseerr 后，会在账户创建时自动触发用户导入，并自动关联联系方式（邮箱、Discord 和 Telegram）。必须先将模板添加到用户配置文件中，账户才会被创建。"
+    },
+    "backups": {
+      "name": "备份",
+      "description": "数据库备份相关设置。点击上方“备份”按钮可创建、下载和恢复备份。"
+    },
+    "welcome_email": {
+      "name": "欢迎消息",
+      "description": "可选：向新用户发送包含 Jellyfin URL 和用户名的欢迎消息。"
+    },
+    "email_confirmation": {
+      "name": "邮箱确认",
+      "description": "启用后，用户会收到邮箱确认链接，用于在创建账户前确认密码正确。"
+    },
+    "user_expiry": {
+      "name": "账户到期",
+      "description": "在邀请中设置后，用户创建账户经过指定时间后会被删除或停用。也可以为单个用户设置或延长到期时间，并可选择附带说明原因的消息。"
+    },
+    "disable_enable": {
+      "name": "账户停用/启用",
+      "description": "账户停用/启用邮件的主题和邮件文件设置。"
+    },
+    "deletion": {
+      "name": "账户删除",
+      "description": "账户删除邮件的主题和邮件文件设置。"
+    },
+    "webhooks": {
+      "name": "Webhooks",
+      "description": "事件发生时，jfa-go 会向这些 URL 发送包含相关信息的 POST 请求。启用调试日志后，请求信息会被记录。"
+    },
+    "files": {
+      "name": "文件存储",
+      "description": "用于修改存储位置的可选设置。"
+    }
+  },
+  "settings": {
+    "updates": {
+      "enabled": {
+        "name": "启用",
+        "description": "启用或停用更新通知，以及更新的下载和应用。"
+      },
+      "channel": {
+        "name": "发布通道",
+        "description": "用于接收更新的发布通道。"
+      }
+    },
+    "jellyfin": {
+      "username": {
+        "name": "Jellyfin 用户名",
+        "description": "建议为此程序创建一个权限受限的管理员账户。"
+      },
+      "password": {
+        "name": "Jellyfin 密码"
+      },
+      "server": {
+        "name": "服务器地址",
+        "description": "Jellyfin 服务器地址。可以填写公网地址；出于安全考虑，也可以填写本地地址。"
+      },
+      "public_server": {
+        "name": "公开访问地址",
+        "description": "邀请表单中展示给用户访问的 Jellyfin 地址。留空则复用上方地址。"
+      },
+      "client": {
+        "name": "客户端名称",
+        "description": "显示在 Jellyfin 仪表盘中的客户端名称。"
+      },
+      "cache_timeout": {
+        "name": "用户缓存超时（分钟）",
+        "description": "用户缓存的超时时间，单位为分钟。设为 0 可停用缓存。"
+      },
+      "web_cache_async_timeout": {
+        "name": "用户搜索缓存异步刷新时间（分钟）",
+        "description": "缓存达到此时间后异步同步，但页面不会等待同步完成：账户标签页会更快加载，但在下一次请求前可能显示旧结果。"
+      },
+      "web_cache_sync_timeout": {
+        "name": "用户搜索缓存同步刷新时间（分钟）",
+        "description": "缓存达到此时间后同步刷新并等待完成：账户标签页加载可能稍慢，但会显示最新结果。"
+      },
+      "activity_cache_sync_timeout": {
+        "name": "活动缓存超时（分钟）",
+        "description": "缓存达到此时间后同步 Jellyfin 活动日志。同步只拉取新记录，通常很快，因此可以设得较低。注意：这与 jfa-go 自己的活动日志无关。"
+      },
+      "type": {
+        "name": "服务器类型",
+        "description": "注意：Emby 集成可以使用，但缺少部分功能，例如密码重置。"
+      },
+      "substitute_jellyfin_strings": {
+        "name": "替换 “Jellyfin” 文案",
+        "description": "可选：用此文本替换账户创建表单和邮件中的 “Jellyfin”。可能会导致语句不够自然。"
+      }
+    },
+    "ui": {
+      "language-form": {
+        "name": "默认表单语言",
+        "description": "账户表单默认语言。如需参与翻译，请访问 weblate.jfa-go.com。"
+      },
+      "language-admin": {
+        "name": "默认管理端语言",
+        "description": "管理页面默认语言。如需参与翻译，请访问 weblate.jfa-go.com。"
+      },
+      "theme": {
+        "name": "默认外观",
+        "description": "所有用户的默认界面外观。"
+      },
+      "host": {
+        "name": "监听地址",
+        "description": "设为 0.0.0.0 可在本机监听所有地址。"
+      },
+      "port": {
+        "name": "端口"
+      },
+      "jellyfin_login": {
+        "name": "使用 Jellyfin 进行身份验证",
+        "description": "启用后将使用 Jellyfin 用户登录，而不是使用下方的网页用户名和密码。"
+      },
+      "admin_only": {
+        "name": "仅允许管理员访问“管理”页面",
+        "description": "仅允许 Jellyfin 中的管理员用户访问管理页面。不适用于“我的账户”页面。"
+      },
+      "allow_all": {
+        "name": "允许所有用户登录“管理”页面",
+        "description": "允许所有 Jellyfin 用户访问 jfa-go。不建议这样做，建议在“账户”标签页中单独添加用户。不适用于“我的账户”页面。"
+      },
+      "username": {
+        "name": "网页用户名",
+        "description": "管理页面登录用户名（如果使用 jellyfin_login，可留空）。"
+      },
+      "password": {
+        "name": "网页密码",
+        "description": "管理页面登录密码（如果使用 jellyfin_login，可留空）。"
+      },
+      "email": {
+        "name": "管理员邮箱地址",
+        "description": "接收通知的邮箱地址（如果使用 jellyfin_login，可留空）。"
+      },
+      "debug": {
+        "name": "调试日志",
+        "description": "启用调试日志，并开放 pprof 路由（不要在生产环境中使用！）。"
+      },
+      "contact_message": {
+        "name": "联系信息",
+        "description": "显示在除管理页面外所有页面的底部。"
+      },
+      "help_message": {
+        "name": "帮助说明",
+        "description": "显示在邀请表单顶部。"
+      },
+      "success_message": {
+        "name": "成功提示",
+        "description": "用户创建账户成功后显示。若需要更精细的控制，请使用消息编辑器中的“注册后卡片”。"
+      },
+      "subfolder_note": {
+        "name": "反向代理到子路径？",
+        "description": "将子路径（例如 /accounts）填写到“反向代理子路径”，并将包含该路径的完整 URL（例如 https://jellyf.in/accounts）填写到“外部 jfa-go URL”。"
+      },
+      "jfa_url": {
+        "name": "外部 jfa-go URL",
+        "description": "可访问 jfa-go 根路径（通常是管理页面）的 URL。如果使用子路径，请一并填写。虽然反向代理通常会报告这些信息，但发送邀请消息等服务端操作无法自动获知。"
+      },
+      "use_proxy_host": {
+        "name": "尽可能使用反向代理报告的 “Host”",
+        "description": "启用后，网页应用会优先使用反向代理报告的 “Host”，而不是“外部 jfa-go URL”的值。如果你经常通过多个主机名或域名访问 jfa-go，这会很有用。同时请确保代理会传递 X-Forwarded-Proto 或 X-Forwarded-Protocol。"
+      },
+      "url_base": {
+        "name": "反向代理子路径",
+        "description": "通过反向代理将 jfa-go 放在子路径下运行时使用的 URL 基路径。请包含开头的 /，例如 “/accounts”。"
+      },
+      "redirect_url": {
+        "name": "表单成功后跳转 URL",
+        "description": "设置用户注册成功后邀请表单跳转到的其他 URL。默认使用 Jellyfin 标签页中的“公开地址”或“服务器地址”。"
+      },
+      "auto_redirect": {
+        "name": "成功后自动跳转",
+        "description": "成功后直接跳转到上方 URL，不再要求用户点击“继续”。此设置会覆盖注册后卡片。"
+      },
+      "login_appearance": {
+        "name": "登录界面外观",
+        "description": "管理端登录界面的外观。"
+      },
+      "urlpaths_note": {
+        "name": "URL 路径：",
+        "description": "想让“我的账户”位于 “/”，或让管理页面位于 “/admin”？请启用高级设置，并查看“URL 路径”部分。"
+      }
+    },
+    "url_paths": {
+      "admin": {
+        "name": "管理页面子路径",
+        "description": "管理页面所在的 URL 子路径。"
+      },
+      "user_page": {
+        "name": "“我的账户”子路径",
+        "description": "“我的账户”页面所在的 URL 子路径。"
+      },
+      "form": {
+        "name": "邀请页面子路径",
+        "description": "邀请页面所在的 URL 子路径。"
+      }
+    },
+    "advanced": {
+      "log_ips": {
+        "name": "记录访问管理页面的 IP",
+        "description": "在控制台和活动记录中记录管理员及管理页面请求的 IP 地址。请阅读下方关于合法性的提示。"
+      },
+      "log_ips_users": {
+        "name": "记录访问用户页面的 IP",
+        "description": "在控制台和活动记录中记录用户 IP 地址。请阅读下方关于合法性的提示。"
+      },
+      "ip_note": {
+        "name": "记录 IP：",
+        "description": "通过 jfa-go 记录 IP 地址可能违反 GDPR 或其他隐私法规，因为 IP 会与账户信息关联。请自行承担启用风险。"
+      },
+      "tls": {
+        "name": "TLS/HTTP2",
+        "description": "通过 TLS 提供应用服务，并启用 HTTP2 预加载。"
+      },
+      "tls_port": {
+        "name": "TLS 端口",
+        "description": "TLS 服务器监听端口。"
+      },
+      "tls_cert": {
+        "name": "TLS 证书路径",
+        "description": ".crt 文件路径。更多信息请参考 jfa-go wiki。"
+      },
+      "tls_key": {
+        "name": "TLS 密钥文件路径",
+        "description": ".key 文件路径。更多信息请参考 jfa-go wiki。"
+      },
+      "auth_retry_count": {
+        "name": "初始认证重试次数",
+        "description": "初始连接 Jellyfin 失败前的重试次数。"
+      },
+      "auth_retry_gap": {
+        "name": "初始认证重试间隔（秒）",
+        "description": "每次连接重试之间等待的秒数。"
+      },
+      "proxy": {
+        "name": "使用代理",
+        "description": "是否使用 HTTP/SOCKS5 代理。"
+      },
+      "proxy_protocol": {
+        "name": "代理协议",
+        "description": "代理连接使用的协议。"
+      },
+      "proxy_address": {
+        "name": "代理地址",
+        "description": "代理地址，包含端口。"
+      },
+      "proxy_user": {
+        "name": "代理用户名",
+        "description": "如果不需要身份验证，请留空。"
+      },
+      "proxy_password": {
+        "name": "代理密码",
+        "description": "如果不需要身份验证，请留空。"
+      },
+      "value_log_note": {
+        "name": "Value Log：",
+        "description": "配置文件夹中的 Value Log（vlog）文件用于确保数据库数据完整性。它可能变得很大，因此可以调整最大大小。退出 jfa-go 后，可以安全删除该文件且不会丢失数据。"
+      },
+      "value_log_size": {
+        "name": "数据库最大 vlog 大小（MiB）",
+        "description": "数据库 Value Log 的最大大小。较小的值可能降低性能。"
+      },
+      "debug_log_emails": {
+        "name": "调试存储日志：邮件",
+        "description": "为数据库写入增加额外调试日志。*：删除也包括清空主要字段，例如邮箱地址。"
+      },
+      "debug_log_discord": {
+        "name": "调试存储日志：Discord",
+        "description": "为数据库写入增加额外调试日志。*：删除也包括清空主要字段，例如邮箱地址。"
+      },
+      "debug_log_telegram": {
+        "name": "调试存储日志：Telegram",
+        "description": "为数据库写入增加额外调试日志。*：删除也包括清空主要字段，例如邮箱地址。"
+      },
+      "debug_log_matrix": {
+        "name": "调试存储日志：Matrix",
+        "description": "为数据库写入增加额外调试日志。*：删除也包括清空主要字段，例如邮箱地址。"
+      },
+      "debug_log_invites": {
+        "name": "调试存储日志：邀请",
+        "description": "为数据库写入增加额外调试日志。*：删除也包括清空主要字段，例如邮箱地址。"
+      },
+      "debug_log_announcements": {
+        "name": "调试存储日志：公告",
+        "description": "为数据库写入增加额外调试日志。*：删除也包括清空主要字段，例如邮箱地址。"
+      },
+      "debug_log_expiries": {
+        "name": "调试存储日志：用户到期",
+        "description": "为数据库写入增加额外调试日志。*：删除也包括清空主要字段，例如邮箱地址。"
+      },
+      "debug_log_profiles": {
+        "name": "调试存储日志：配置文件",
+        "description": "为数据库写入增加额外调试日志。*：删除也包括清空主要字段，例如邮箱地址。"
+      },
+      "debug_log_custom_content": {
+        "name": "调试存储日志：自定义消息内容",
+        "description": "为数据库写入增加额外调试日志。*：删除也包括清空主要字段，例如邮箱地址。"
+      }
+    },
+    "activity_log": {
+      "keep_n_records": {
+        "name": "保留记录数量",
+        "description": "要保留的最近活动数量。设为 0 可停用。"
+      },
+      "delete_after_days": {
+        "name": "删除早于指定天数的活动：",
+        "description": "如果活动创建时间早于此天数，将被删除。设为 0 可停用。"
+      }
+    },
+    "captcha": {
+      "enabled": {
+        "name": "启用",
+        "description": "在账户创建表单中启用验证码。"
+      },
+      "recaptcha": {
+        "name": "使用 Google reCAPTCHA",
+        "description": "更可靠，但需要一些配置。更多信息请参考 jfa-go wiki。"
+      },
+      "recaptcha_site_key": {
+        "name": "reCAPTCHA 站点密钥",
+        "description": "站点密钥。获取方式请参考 jfa-go wiki。"
+      },
+      "recaptcha_secret_key": {
+        "name": "reCAPTCHA 密钥",
+        "description": "密钥。获取方式请参考 jfa-go wiki。"
+      },
+      "recaptcha_hostname": {
+        "name": "主机名",
+        "description": "jfa-go 的公开主机名，例如 “site.com”。不要包含任何子路径。"
+      }
+    },
+    "user_page": {
+      "enabled": {
+        "name": "启用"
+      },
+      "jellyfin_login_note": {
+        "name": "注意：",
+        "description": "必须启用 Jellyfin 登录才能使用此功能，并且必须启用通过链接重置密码，用户才能自助操作。"
+      },
+      "edit_note": {
+        "name": "消息卡片：",
+        "description": "点击“用户页面”设置旁的编辑图标，可添加展示给用户的自定义 Markdown 消息。注意：消息卡片不是私密内容，其他人较容易查看到。"
+      },
+      "show_link": {
+        "name": "在管理端登录页显示链接",
+        "description": "是否在管理端登录界面显示“我的账户”页面链接，用于引导走错页面的用户。"
+      },
+      "referrals": {
+        "name": "用户推荐",
+        "description": "为用户分配自己的“邀请”，方便他们发送给其他人。"
+      },
+      "referrals_note": {
+        "name": "使用推荐：",
+        "description": "先创建一个带有所需设置的邀请，然后在“账户”标签页中分配给用户，或在设置中分配给配置文件。"
+      },
+      "allow_pwr_username": {
+        "name": "允许用用户名发起密码重置",
+        "description": "允许用户输入用户名来发起密码重置。"
+      },
+      "allow_pwr_email": {
+        "name": "允许用邮箱地址发起密码重置",
+        "description": "允许用户输入邮箱地址来发起密码重置。"
+      },
+      "allow_pwr_contact_method": {
+        "name": "允许用 Discord/Telegram/Matrix 发起密码重置",
+        "description": "允许用户输入 Discord/Telegram/Matrix 用户名或 ID 来发起密码重置。"
+      },
+      "pwr_note": {
+        "name": "密码重置方式：",
+        "description": "请至少选择一种密码重置发起方式。如果不选择任何方式，将全部启用。"
+      }
+    },
+    "password_validation": {
+      "enabled": {
+        "name": "启用"
+      },
+      "min_length": {
+        "name": "最小长度"
+      },
+      "upper": {
+        "name": "最少大写字母数"
+      },
+      "lower": {
+        "name": "最少小写字母数"
+      },
+      "number": {
+        "name": "最少数字数量"
+      },
+      "special": {
+        "name": "最少特殊字符数量"
+      }
+    },
+    "messages": {
+      "enabled": {
+        "name": "启用",
+        "description": "启用密码重置、公告等邮件/消息发送功能。"
+      },
+      "use_24h": {
+        "name": "使用 24 小时制"
+      },
+      "date_format": {
+        "name": "日期格式",
+        "description": "邮件中使用的日期格式。遵循 datetime.strftime 格式。"
+      },
+      "message": {
+        "name": "帮助说明",
+        "description": "显示在邮件底部的消息。"
+      },
+      "edit_note": {
+        "name": "自定义消息：",
+        "description": "点击“消息/通知”设置旁的编辑图标，可使用 Markdown 自定义发送给用户的消息。"
+      }
+    },
+    "email": {
+      "language": {
+        "name": "邮件语言",
+        "description": "默认邮件语言。如需参与翻译，请在 GitHub 提交 PR。"
+      },
+      "collect": {
+        "name": "注册时收集",
+        "description": "在注册表单中要求用户填写邮箱地址。"
+      },
+      "required": {
+        "name": "注册时必填",
+        "description": "注册时要求填写邮箱地址。"
+      },
+      "require_unique": {
+        "name": "要求地址唯一",
+        "description": "禁止多个账户使用同一个地址。"
+      },
+      "no_username": {
+        "name": "使用邮箱地址作为用户名",
+        "description": "将邀请表单中的邮箱地址作为 Jellyfin 用户名。"
+      },
+      "method": {
+        "name": "邮件发送方式",
+        "description": "要使用的邮件发送方式。"
+      },
+      "address": {
+        "name": "发件人（地址）",
+        "description": "用于发送邮件的发件地址。"
+      },
+      "from": {
+        "name": "发件人（名称）",
+        "description": "发件人显示名称。"
+      },
+      "plaintext": {
+        "name": "以纯文本发送邮件",
+        "description": "以纯文本而不是 HTML 格式发送邮件。"
+      },
+      "test_note": {
+        "name": "测试设置：",
+        "description": "前往“账户”标签页，选择你的用户（确保已分配邮箱地址），然后给自己发送一条公告。"
+      }
+    },
+    "mailgun": {
+      "api_url": {
+        "name": "API URL"
+      },
+      "api_key": {
+        "name": "API 密钥"
+      }
+    },
+    "smtp": {
+      "username": {
+        "name": "用户名",
+        "description": "SMTP 用户名。留空则使用发件地址作为用户名。"
+      },
+      "encryption": {
+        "name": "加密方式",
+        "description": "你的邮件服务商应为不同加密方式提供不同端口。通常 ssl_tls 使用 465，starttls 使用 587。"
+      },
+      "server": {
+        "name": "服务器地址",
+        "description": "SMTP 服务器地址。"
+      },
+      "port": {
+        "name": "端口"
+      },
+      "password": {
+        "name": "密码"
+      },
+      "hello_hostname": {
+        "name": "HELLO 主机名",
+        "description": "向 SMTP 服务器发送 HELLO 时使用的主机名。有些服务器不接受默认的 “localhost”，例如 smtp-relay.gmail.com。"
+      },
+      "ssl_cert": {
+        "name": "自定义 SSL 证书路径",
+        "description": "当系统不信任你的 SMTP 服务器 SSL 证书时使用。"
+      },
+      "cert_validation": {
+        "name": "验证证书",
+        "description": "警告：停用此项会显著增加遭受中间人攻击的风险。"
+      },
+      "auth_type": {
+        "name": "身份验证类型",
+        "description": "SMTP 身份验证方式。"
+      }
+    },
+    "discord": {
+      "enabled": {
+        "name": "启用",
+        "description": "启用通过 Discord 进行注册验证，并通过 Discord 发送通知。\n机器人配置方法请参考 jfa-go wiki。"
+      },
+      "show_on_reg": {
+        "name": "在用户注册时显示",
+        "description": "允许用户在注册页面关联 Discord。"
+      },
+      "required": {
+        "name": "注册时必填",
+        "description": "注册时要求关联 Discord。配置方法请参考 jfa-go wiki。"
+      },
+      "require_unique": {
+        "name": "要求用户唯一",
+        "description": "禁止多个 Jellyfin 账户使用同一个用户。"
+      },
+      "token": {
+        "name": "API 令牌",
+        "description": "Discord 机器人 API 令牌。"
+      },
+      "start_command": {
+        "name": "启动命令",
+        "description": "用于启动用户验证流程的命令。"
+      },
+      "channel": {
+        "name": "监听频道",
+        "description": "只监听指定频道中的命令。留空则监听全部频道。"
+      },
+      "provide_invite": {
+        "name": "提供服务器邀请",
+        "description": "为账户创建表单生成一次性 Discord 服务器邀请。需要机器人具备“创建即时邀请”权限，之后你可能需要将机器人重新添加到服务器。"
+      },
+      "invite_channel": {
+        "name": "邀请频道",
+        "description": "邀请新用户加入的频道名称。"
+      },
+      "apply_role": {
+        "name": "关联后应用角色",
+        "description": "用户注册时为其添加所选角色。"
+      },
+      "disable_enable_role": {
+        "name": "用户启用、停用或删除时移除/添加角色",
+        "description": "用户被停用或删除时移除 Discord 角色；重新启用时再加回。"
+      },
+      "language": {
+        "name": "语言",
+        "description": "默认 Discord 消息语言。如需参与翻译，请访问 Weblate。"
+      }
+    },
+    "telegram": {
+      "enabled": {
+        "name": "启用",
+        "description": "启用通过 Telegram 进行注册验证，并通过 Telegram 发送通知。\n机器人配置方法请参考 jfa-go wiki。"
+      },
+      "show_on_reg": {
+        "name": "在用户注册时显示",
+        "description": "允许用户在注册页面关联 Telegram。"
+      },
+      "required": {
+        "name": "注册时必填",
+        "description": "注册时要求关联 Telegram。"
+      },
+      "require_unique": {
+        "name": "要求用户唯一",
+        "description": "禁止多个 Jellyfin 账户使用同一个用户。"
+      },
+      "token": {
+        "name": "API 令牌",
+        "description": "Telegram 机器人 API 令牌。"
+      },
+      "language": {
+        "name": "语言",
+        "description": "默认 Telegram 消息语言。如需参与翻译，请访问 Weblate。"
+      },
+      "ignore_client_language": {
+        "name": "始终使用默认语言",
+        "description": "停用时，jfa-go 会检查 Telegram 用户的语言，并在可用时使用该语言。启用后将忽略用户语言，始终使用你配置的默认语言。"
+      }
+    },
+    "matrix": {
+      "enabled": {
+        "name": "启用",
+        "description": "启用通过 Matrix 进行注册验证，并通过 Matrix 发送通知。\n机器人配置方法请参考 jfa-go wiki。"
+      },
+      "show_on_reg": {
+        "name": "在用户注册时显示",
+        "description": "允许用户在注册页面关联 Matrix。"
+      },
+      "required": {
+        "name": "注册时必填",
+        "description": "注册时要求关联 Matrix。"
+      },
+      "require_unique": {
+        "name": "要求用户唯一",
+        "description": "禁止多个 Jellyfin 账户使用同一个用户。"
+      },
+      "homeserver": {
+        "name": "主服务器 URL",
+        "description": "Matrix 主服务器 URL。"
+      },
+      "token": {
+        "name": "访问令牌",
+        "description": "Matrix 机器人 API 令牌。"
+      },
+      "user_id": {
+        "name": "机器人用户 ID",
+        "description": "机器人账户的用户 ID（示例：@jfa-bot:riot.im）。"
+      },
+      "topic": {
+        "name": "聊天主题",
+        "description": "Matrix 私聊的主题。"
+      },
+      "language": {
+        "name": "语言",
+        "description": "默认 Matrix 消息语言。如需参与翻译，请访问 Weblate。"
+      },
+      "encryption": {
+        "name": "端到端加密",
+        "description": "为消息启用端到端加密。"
+      },
+      "e2ee_note": {
+        "name": "端到端加密：",
+        "description": "如果你看不到此设置，说明当前 jfa-go 版本不包含此功能。更多信息请参考 wiki。"
+      }
+    },
+    "password_resets": {
+      "enabled": {
+        "name": "启用",
+        "description": "启用后会存储用户提供的邮箱地址、监控 Jellyfin 目录中的密码重置文件，并发送重置 PIN。"
+      },
+      "pwr_note": {
+        "name": "设置：",
+        "description": "密码重置有多种设置方式。更多信息请参考 wiki 页面。"
+      },
+      "watch_directory": {
+        "name": "Jellyfin 目录",
+        "description": "Jellyfin 放置密码重置文件的文件夹路径。"
+      },
+      "watch_polling": {
+        "name": "使用轮询",
+        "description": "如果通过网络挂载（NFS/SMB/SFTP），请使用此项。它会定期检查 Jellyfin 目录，而不是使用操作系统监听 API。"
+      },
+      "link_reset": {
+        "name": "使用重置链接而不是 PIN（Ombi 必需）",
+        "description": "向用户发送密码重置链接，而不是 PIN。若要同时重置 Ombi 和 Jellyfin 密码，必须启用此项。"
+      },
+      "set_password": {
+        "name": "通过链接设置密码",
+        "description": "不再自动将用户密码设为 PIN，而是允许用户通过重置链接设置新密码。"
+      },
+      "url_base": {
+        "name": "外部 jfa-go URL",
+        "description": "可访问 jfa-go 管理页面的 URL。如果使用子路径，请一并填写。如果已在“邀请邮件”中设置，可保留该值。使用反向代理时，程序无法自行得知外部 URL，因此需要此设置。"
+      },
+      "jfa_url": {
+        "name": "生成重置链接：",
+        "description": "请在“通用”中设置“外部 jfa-go URL”，以便生成指向 jfa-go 的链接。"
+      },
+      "language": {
+        "name": "默认重置链接语言",
+        "description": "密码重置成功页面的默认语言。"
+      },
+      "email_html": {
+        "name": "自定义邮件（HTML）",
+        "description": "自定义 HTML 邮件路径。"
+      },
+      "email_text": {
+        "name": "自定义邮件（纯文本）",
+        "description": "自定义纯文本邮件路径。"
+      },
+      "subject": {
+        "name": "邮件主题",
+        "description": "密码重置邮件的主题。"
+      }
+    },
+    "invite_emails": {
+      "enabled": {
+        "name": "启用"
+      },
+      "email_html": {
+        "name": "自定义邮件（HTML）",
+        "description": "自定义 HTML 邮件路径。"
+      },
+      "email_text": {
+        "name": "自定义邮件（纯文本）",
+        "description": "自定义纯文本邮件路径。"
+      },
+      "subject": {
+        "name": "邮件主题",
+        "description": "邀请邮件的主题。"
+      },
+      "url_base": {
+        "name": "外部 jfa-go URL",
+        "description": "可访问 jfa-go 根路径（管理页面）的 URL。如果使用子路径，请一并填写。如果已在“邀请邮件”中设置，可保留该值。使用反向代理时，程序无法自行得知外部 URL，因此需要此设置。"
+      },
+      "jfa_url": {
+        "name": "生成链接：",
+        "description": "请在“通用”中设置“外部 jfa-go URL”，以便生成指向 jfa-go 的链接。"
+      }
+    },
+    "template_email": {
+      "email_html": {
+        "name": "自定义模板邮件（HTML）",
+        "description": "公告/自定义消息所用自定义 HTML 邮件模板路径。"
+      },
+      "email_text": {
+        "name": "自定义模板邮件（纯文本）",
+        "description": "公告/自定义消息所用自定义纯文本邮件模板路径。"
+      }
+    },
+    "notifications": {
+      "enabled": {
+        "name": "启用",
+        "description": "启用后，会在邀请中添加可选开关，用于在邀请过期和用户创建时发送通知。"
+      },
+      "expiry_html": {
+        "name": "过期通知邮件（HTML）",
+        "description": "过期通知 HTML 邮件路径。"
+      },
+      "expiry_text": {
+        "name": "过期通知邮件（纯文本）",
+        "description": "过期通知纯文本邮件路径。"
+      },
+      "created_html": {
+        "name": "用户创建通知邮件（HTML）",
+        "description": "用户创建通知 HTML 邮件路径。"
+      },
+      "created_text": {
+        "name": "用户创建通知邮件（纯文本）",
+        "description": "用户创建通知纯文本邮件路径。"
+      }
+    },
+    "ombi": {
+      "enabled": {
+        "name": "启用",
+        "description": "启用后会为新的 Jellyfin 用户创建 Ombi 账户。"
+      },
+      "server": {
+        "name": "URL",
+        "description": "Ombi 服务器 URL，需包含 http(s)://。"
+      },
+      "api_key": {
+        "name": "API 密钥",
+        "description": "API 密钥。可在 Ombi 设置的第一个标签页中获取。"
+      }
+    },
+    "jellyseerr": {
+      "enabled": {
+        "name": "启用",
+        "description": "启用 Jellyseerr 集成。"
+      },
+      "usertype_note": {
+        "name": "密码变更：",
+        "description": "请确保 Jellyseerr 中的现有用户是 “Jellyfin User”，而不是 “Local User”，因为本地用户的密码变更不会同步到 Jellyseerr。"
+      },
+      "server": {
+        "name": "URL",
+        "description": "Jellyseerr 服务器 URL。"
+      },
+      "api_key": {
+        "name": "API 密钥",
+        "description": "API 密钥。可在 Jellyseerr 设置的第一个标签页中获取（不是 “Jellyfin” 标签页！）。"
+      },
+      "import_existing": {
+        "name": "将现有用户导入 Jellyseerr",
+        "description": "现有用户（以及在 jfa-go 外部创建的用户）的联系方式会被导入 Jellyseerr。"
+      },
+      "constraints_note": {
+        "name": "邮箱唯一性：",
+        "description": "Jellyseerr 要求邮箱地址唯一。如果不满足此条件，你可能会在 jfa-go 日志中看到错误。可在“设置 > 邮件”中要求邮箱地址唯一。"
+      }
+    },
+    "backups": {
+      "enabled": {
+        "name": "定时备份",
+        "description": "启用后按计划生成数据库备份。"
+      },
+      "path": {
+        "name": "备份路径",
+        "description": "用于存储备份的目录路径。默认是 <data_directory>/backups。"
+      },
+      "every_n_minutes": {
+        "name": "备份频率（分钟）",
+        "description": "距离上次备份经过此分钟数后再次备份。每次重启后重新计时。"
+      },
+      "keep_n_backups": {
+        "name": "保留备份数量",
+        "description": "要保留的最新备份数量。达到上限后，创建新备份前会先删除最旧备份。"
+      },
+      "keep_previous_version_backup": {
+        "name": "为每个旧版本保留 1 个备份",
+        "description": "始终保留每个 jfa-go 版本的最新备份，以防更新出现问题。启用后，这些备份不计入“保留备份数量”。"
+      }
+    },
+    "welcome_email": {
+      "enabled": {
+        "name": "启用",
+        "description": "启用后向新用户发送欢迎邮件。"
+      },
+      "subject": {
+        "name": "邮件主题",
+        "description": "欢迎邮件的主题。"
+      },
+      "email_html": {
+        "name": "自定义邮件（HTML）",
+        "description": "自定义 HTML 邮件路径。"
+      },
+      "email_text": {
+        "name": "自定义邮件（纯文本）",
+        "description": "自定义纯文本邮件路径。"
+      }
+    },
+    "email_confirmation": {
+      "enabled": {
+        "name": "启用"
+      },
+      "subject": {
+        "name": "邮件主题",
+        "description": "邮箱确认邮件的主题。"
+      },
+      "email_html": {
+        "name": "自定义邮件（HTML）",
+        "description": "自定义 HTML 邮件路径。"
+      },
+      "email_text": {
+        "name": "自定义邮件（纯文本）",
+        "description": "自定义纯文本邮件路径。"
+      }
+    },
+    "user_expiry": {
+      "behaviour": {
+        "name": "处理方式",
+        "description": "账户到期时删除用户还是停用用户。"
+      },
+      "delete_expired_after_days": {
+        "name": "到期后删除账户（天）",
+        "description": "设置后，如果“处理方式”为“停用用户”，账户会在到期后经过此天数被删除。设为 0 可停用。"
+      },
+      "send_email": {
+        "name": "发送消息",
+        "description": "用户账户到期时发送邮件。"
+      },
+      "send_reminder_n_days_before": {
+        "name": "到期前 N 天发送消息",
+        "description": "在用户账户到期前 N 天发送消息。可以设置多个时间点。"
+      },
+      "subject": {
+        "name": "邮件主题",
+        "description": "用户到期邮件的主题。"
+      },
+      "email_html": {
+        "name": "自定义邮件（HTML）",
+        "description": "自定义 HTML 邮件路径。"
+      },
+      "email_text": {
+        "name": "自定义邮件（纯文本）",
+        "description": "自定义纯文本邮件路径。"
+      },
+      "adjustment_subject": {
+        "name": "调整：邮件主题",
+        "description": "调整邮件的主题；设置或延长到期时间时可选择发送。"
+      },
+      "adjustment_email_html": {
+        "name": "调整：自定义邮件（HTML）",
+        "description": "自定义 HTML 邮件路径。"
+      },
+      "adjustment_email_text": {
+        "name": "调整：自定义邮件（纯文本）",
+        "description": "自定义纯文本邮件路径。"
+      },
+      "reminder_subject": {
+        "name": "提醒：邮件主题",
+        "description": "到期提醒邮件的主题。"
+      },
+      "reminder_email_html": {
+        "name": "提醒：自定义邮件（HTML）",
+        "description": "自定义 HTML 邮件路径。"
+      },
+      "reminder_email_text": {
+        "name": "提醒：自定义邮件（纯文本）",
+        "description": "自定义纯文本邮件路径。"
+      }
+    },
+    "disable_enable": {
+      "subject_disabled": {
+        "name": "邮件主题（停用）",
+        "description": "账户停用邮件的主题。"
+      },
+      "subject_enabled": {
+        "name": "邮件主题（启用）",
+        "description": "账户启用邮件的主题。"
+      },
+      "disabled_html": {
+        "name": "自定义停用邮件（HTML）",
+        "description": "自定义 HTML 邮件路径。"
+      },
+      "disabled_text": {
+        "name": "自定义停用邮件（纯文本）",
+        "description": "自定义纯文本邮件路径。"
+      },
+      "enabled_html": {
+        "name": "自定义启用邮件（HTML）",
+        "description": "自定义 HTML 邮件路径。"
+      },
+      "enabled_text": {
+        "name": "自定义启用邮件（纯文本）",
+        "description": "自定义纯文本邮件路径。"
+      }
+    },
+    "deletion": {
+      "subject": {
+        "name": "邮件主题",
+        "description": "账户删除邮件的主题。"
+      },
+      "email_html": {
+        "name": "自定义邮件（HTML）",
+        "description": "自定义 HTML 邮件路径。"
+      },
+      "email_text": {
+        "name": "自定义邮件（纯文本）",
+        "description": "自定义纯文本邮件路径。"
+      }
+    },
+    "webhooks": {
+      "created": {
+        "name": "用户已创建",
+        "description": "通过 jfa-go 创建账户时要请求的 URL。会发送 `respUser` 对象。"
+      }
+    },
+    "files": {
+      "invites": {
+        "name": "邀请存储",
+        "description": "已存储邀请的位置（json）。"
+      },
+      "password_resets": {
+        "name": "密码重置",
+        "description": "已存储的非 Jellyfin 密码重置位置（json）。"
+      },
+      "emails": {
+        "name": "邮箱地址",
+        "description": "已存储邮箱地址的位置（json）。"
+      },
+      "users": {
+        "name": "用户存储",
+        "description": "设置用户到期时，用于临时存储用户。"
+      },
+      "ombi_template": {
+        "name": "Ombi 用户模板",
+        "description": "已存储 Ombi 用户模板的位置。"
+      },
+      "user_profiles": {
+        "name": "用户配置文件",
+        "description": "已存储用户配置文件的位置（包含模板、配置和显示偏好）（json）。"
+      },
+      "html_templates": {
+        "name": "自定义 HTML 模板目录",
+        "description": "包含自定义 Web UI 页面版本的目录路径。更多信息请参考 wiki。"
+      },
+      "lang_files": {
+        "name": "自定义语言文件目录",
+        "description": "目录路径，其结构需与内部 “lang/” 目录一致。更多信息请参考 GitHub。"
+      },
+      "custom_emails": {
+        "name": "自定义邮件内容",
+        "description": "程序在设置中生成的 JSON 文件，不同于 email_html/email_text。更多信息请参考 wiki。"
+      },
+      "custom_user_page_content": {
+        "name": "自定义用户页面内容",
+        "description": "程序在设置中生成的 JSON 文件，包含用户页面消息。更多信息请参考 wiki。"
+      },
+      "telegram_users": {
+        "name": "Telegram 用户",
+        "description": "存储 Telegram 用户 ID 和语言偏好。"
+      },
+      "matrix_users": {
+        "name": "Matrix 用户",
+        "description": "存储 Matrix 用户 ID 和语言偏好。"
+      },
+      "matrix_sql": {
+        "name": "Matrix 加密数据库",
+        "description": "存储 Matrix 端到端加密所需的加密材料。"
+      },
+      "discord_users": {
+        "name": "Discord 用户",
+        "description": "存储 Discord 用户 ID 和语言偏好。"
+      },
+      "announcements": {
+        "name": "公告模板",
+        "description": "存储自定义公告模板。"
+      }
+    }
+  },
+  "options": {
+    "updates": {
+      "channel": {
+        "stable": "稳定版",
+        "unstable": "不稳定版"
+      }
+    },
+    "jellyfin": {
+      "type": {
+        "jellyfin": "Jellyfin",
+        "emby": "Emby"
+      }
+    },
+    "ui": {
+      "language-form": {
+        "en-us": "英语（美国）"
+      },
+      "language-admin": {
+        "en-us": "英语（美国）"
+      },
+      "theme": {
+        "Jellyfin (Dark)": "Jellyfin（深色）",
+        "Default (Light)": "默认（浅色）"
+      },
+      "login_appearance": {
+        "clear": "透明",
+        "opaque": "不透明"
+      }
+    },
+    "advanced": {
+      "proxy_protocol": {
+        "http": "HTTP",
+        "socks": "SOCKS5"
+      },
+      "debug_log_emails": {
+        "none": "无",
+        "all": "所有写入",
+        "deletion": "仅删除*"
+      },
+      "debug_log_discord": {
+        "none": "无",
+        "all": "所有写入",
+        "deletion": "仅删除*"
+      },
+      "debug_log_telegram": {
+        "none": "无",
+        "all": "所有写入",
+        "deletion": "仅删除*"
+      },
+      "debug_log_matrix": {
+        "none": "无",
+        "all": "所有写入",
+        "deletion": "仅删除*"
+      },
+      "debug_log_invites": {
+        "none": "无",
+        "all": "所有写入",
+        "deletion": "仅删除*"
+      },
+      "debug_log_announcements": {
+        "none": "无",
+        "all": "所有写入",
+        "deletion": "仅删除*"
+      },
+      "debug_log_expiries": {
+        "none": "无",
+        "all": "所有写入",
+        "deletion": "仅删除*"
+      },
+      "debug_log_profiles": {
+        "none": "无",
+        "all": "所有写入",
+        "deletion": "仅删除*"
+      },
+      "debug_log_custom_content": {
+        "none": "无",
+        "all": "所有写入",
+        "deletion": "仅删除*"
+      }
+    },
+    "email": {
+      "language": {
+        "en-us": "英语（美国）"
+      },
+      "method": {
+        "": "已停用",
+        "smtp": "SMTP",
+        "mailgun": "Mailgun"
+      }
+    },
+    "smtp": {
+      "encryption": {
+        "ssl_tls": "SSL/TLS",
+        "starttls": "STARTTLS",
+        "none": "无（仅限本地使用！）"
+      },
+      "auth_type": {
+        "0": "明文",
+        "1": "登录",
+        "2": "CRAM-MD5",
+        "3": "无",
+        "4": "自动"
+      }
+    },
+    "discord": {
+      "apply_role": {
+        "": "无"
+      },
+      "language": {
+        "en-us": "英语（美国）"
+      }
+    },
+    "telegram": {
+      "language": {
+        "en-us": "英语（美国）"
+      }
+    },
+    "matrix": {
+      "language": {
+        "en-us": "英语（美国）"
+      }
+    },
+    "password_resets": {
+      "language": {
+        "en-us": "英语（美国）"
+      }
+    },
+    "user_expiry": {
+      "behaviour": {
+        "delete_user": "删除用户",
+        "disable_user": "停用用户"
+      }
+    }
+  }
+}

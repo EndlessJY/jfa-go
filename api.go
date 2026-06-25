@@ -229,7 +229,7 @@ func (app *appContext) GetConfig(gc *gin.Context) {
 	if discordEnabled {
 		app.PatchConfigDiscordRoles()
 	}
-	gc.JSON(200, app.patchedConfig)
+	gc.JSON(200, app.localizedConfig(gc, app.patchedConfig))
 }
 
 // @Summary Modify app config.

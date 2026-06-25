@@ -17,7 +17,7 @@ func BuildTagsExternal() {}
 //go:embed build/data build/data/html build/data/web build/data/web/css build/data/web/js
 var loFS embed.FS
 
-//go:embed lang/common lang/admin lang/email lang/form lang/setup lang/pwreset lang/telegram
+//go:embed lang/common lang/admin lang/config lang/email lang/form lang/setup lang/pwreset lang/telegram
 var laFS embed.FS
 
 type rewriteFS struct {

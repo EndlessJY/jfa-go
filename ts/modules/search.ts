@@ -670,19 +670,19 @@ export class Search implements Navigatable {
                 const onDate = document.createElement("button") as HTMLButtonElement;
                 onDate.type = "button";
                 onDate.classList.add("button", "~urge", "flex", "flex-row", "gap-2");
-                onDate.innerHTML = `<i class="ri-calendar-check-line"></i>On Date`;
+                onDate.innerHTML = `<i class="ri-calendar-check-line"></i>${window.lang.strings("onDate")}`;
                 onDate.addEventListener("click", () => this.fillInFilter(queryName, `"="`, -1));
 
                 const beforeDate = document.createElement("button") as HTMLButtonElement;
                 beforeDate.type = "button";
                 beforeDate.classList.add("button", "~urge", "flex", "flex-row", "gap-2");
-                beforeDate.innerHTML = `<i class="ri-calendar-check-line"></i>Before Date`;
+                beforeDate.innerHTML = `<i class="ri-calendar-check-line"></i>${window.lang.strings("beforeDate")}`;
                 beforeDate.addEventListener("click", () => this.fillInFilter(queryName, `"<"`, -1));
 
                 const afterDate = document.createElement("button") as HTMLButtonElement;
                 afterDate.type = "button";
                 afterDate.classList.add("button", "~urge", "flex", "flex-row", "gap-2");
-                afterDate.innerHTML = `<i class="ri-calendar-check-line"></i>After Date`;
+                afterDate.innerHTML = `<i class="ri-calendar-check-line"></i>${window.lang.strings("afterDate")}`;
                 afterDate.addEventListener("click", () => this.fillInFilter(queryName, `">"`, -1));
 
                 container.appendChild(onDate);
