@@ -31,7 +31,22 @@ else
     export JFA_GO_UPDATER=$UPDATER
 fi
 
-JFA_GO_VERSION=$(git describe --exact-match HEAD 2> /dev/null || echo 'vgit')
+if [[ -z "${JFA_GO_VERSION}" ]]; then
+    JFA_GO_VERSION=$(git describe --exact-match HEAD 2> /dev/null || echo 'vgit')
+fi
+if [[ -z "${JFA_GO_CSS_VERSION}" ]]; then
+    JFA_GO_CSS_VERSION="$(git describe --tags --abbrev=0 2> /dev/null || echo 'v0.6.0')"
+fi
+if [[ -z "${JFA_GO_NFPM_EPOCH}" ]]; then
+    JFA_GO_NFPM_EPOCH="$(git rev-list --all --count 2> /dev/null || echo '0')"
+fi
+if [[ -z "${JFA_GO_BUILD_TIME}" ]]; then
+    JFA_GO_BUILD_TIME="$(date +%s)"
+fi
+if [[ -z "${JFA_GO_BUILT_BY}" ]]; then
+    JFA_GO_BUILT_BY="???"
+fi
+export CSSVERSION="${CSSVERSION:-$JFA_GO_CSS_VERSION}"
 TIMEOUT=60m
 
-JFA_GO_CSS_VERSION="$(git describe --tags --abbrev=0)" JFA_GO_NFPM_EPOCH=$(git rev-list --all --count) JFA_GO_BUILD_TIME=$(date +%s) JFA_GO_BUILT_BY=${JFA_GO_BUILT_BY:-"???"} JFA_GO_VERSION="$(echo $JFA_GO_VERSION | sed 's/v//g')" $@ --timeout $TIMEOUT
+JFA_GO_CSS_VERSION="$JFA_GO_CSS_VERSION" JFA_GO_NFPM_EPOCH="$JFA_GO_NFPM_EPOCH" JFA_GO_BUILD_TIME="$JFA_GO_BUILD_TIME" JFA_GO_BUILT_BY="$JFA_GO_BUILT_BY" JFA_GO_VERSION="$(echo $JFA_GO_VERSION | sed 's/v//g')" $@ --timeout $TIMEOUT
