@@ -141,7 +141,7 @@ func (app *appContext) LogoutUser(gc *gin.Context) {
 		return
 	}
 	app.invalidTokens = append(app.invalidTokens, cookie)
-	gc.SetCookie("refresh", "invalid", -1, "/my", gc.Request.URL.Hostname(), true, true)
+	gc.SetCookie("user-refresh", "invalid", -1, "/my", gc.Request.URL.Hostname(), true, true)
 	respondBool(200, true, gc)
 }
 
@@ -733,7 +733,7 @@ func (app *appContext) ChangeMyPassword(gc *gin.Context) {
 	cookie, err := gc.Cookie("user-refresh")
 	if err == nil {
 		app.invalidTokens = append(app.invalidTokens, cookie)
-		gc.SetCookie("refresh", "invalid", -1, "/my", gc.Request.URL.Hostname(), true, true)
+		gc.SetCookie("user-refresh", "invalid", -1, "/my", gc.Request.URL.Hostname(), true, true)
 	} else {
 		app.debug.Printf(lm.FailedGetCookies, "user-refresh", err)
 	}

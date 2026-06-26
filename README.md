@@ -52,15 +52,22 @@ jfa-go is a user management app for [Jellyfin](https://github.com/jellyfin/jelly
 
 ##### [Docker](https://github.com/EndlessJY/jfa-go/pkgs/container/jfa-go)
 ```sh
-docker create \
-             --name "jfa-go" \ # Whatever you want to name it
-             -p 8056:8056 \
-            # -p 8057:8057 if using tls
-             -v /path/to/.config/jfa-go:/data \ # Path to wherever you want to store the config file and other data
-             -v /path/to/jellyfin:/jf \ # Only needed for password resets through Jellyfin, ignore if not using or using Emby
-             -v /etc/localtime:/etc/localtime:ro \ # Makes sure time is correct
-             ghcr.io/endlessjy/jfa-go # ghcr.io/endlessjy/jfa-go:unstable for latest build from git
+docker pull ghcr.io/endlessjy/jfa-go
+
+docker run -d \
+    --name "<container-name>" \
+    --restart unless-stopped \
+    -e TZ="<timezone>" \
+    -p <host-port>:8056 \
+    -v <host-data-dir>:/data \
+    -v /etc/localtime:/etc/localtime:ro \
+    ghcr.io/endlessjy/jfa-go:latest
 ```
+
+Use any container name, host port, timezone and host data directory that match
+your deployment. Add `-v <jellyfin-config-dir>:/jf` only when you need password
+resets through Jellyfin. Use `ghcr.io/endlessjy/jfa-go:unstable` for the latest
+build from git.
 
 ##### [Debian/Ubuntu](https://apt.hrfee.dev)
 ```sh

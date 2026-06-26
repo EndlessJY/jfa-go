@@ -23,7 +23,7 @@ out/remixicon.css: node_modules/remixicon/fonts/remixicon.css
 out/main.js: $(wildcard ts/**/*)
 	-rm -r tempts
 	cp -r ts tempts
-	../scripts/dark-variant.sh tempts
+	CGO_ENABLED=0 go run ../scripts/variants/main.go -dir ts -out tempts
 	$(ESBUILD) --target=es6 --bundle tempts/main.ts --outfile=out/main.js --minify
 
 out/bundle.css: out/modal.css out/remixicon.css out/main.js out/index.html

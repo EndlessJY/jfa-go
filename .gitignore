@@ -12,6 +12,7 @@ docs/*
 lang/langtostruct.py
 config-payload.json
 !docs/go.mod
+!docs/go.sum
 server.key
 server.pem
 server.crt

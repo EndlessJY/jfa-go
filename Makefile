@@ -11,7 +11,7 @@ else
 endif
 GOBINARY ?= go
 
-CSSVERSION ?= $(shell git describe --tags --abbrev=0)
+CSSVERSION ?= $(shell git describe --tags --abbrev=0 2> /dev/null || echo v0.6.0)
 CSS_BUNDLE = $(DATA)/web/css/$(CSSVERSION)bundle.css
 
 VERSION ?= $(shell git describe --exact-match HEAD 2> /dev/null || echo vgit)
@@ -98,7 +98,10 @@ else
 	NPMOPTS :=
 endif
 
-ifeq (, $(shell which swag))
+GO_BIN ?= $(shell GOBIN=$$($(GOBINARY) env GOBIN); if [ -z "$$GOBIN" ]; then echo "$$($(GOBINARY) env GOPATH)/bin"; else echo "$$GOBIN"; fi)
+SWAG ?= $(shell command -v swag 2> /dev/null || echo "$(GO_BIN)/swag")
+
+ifeq (, $(shell test -x "$(SWAG)" && echo y))
 	SWAGINSTALL := $(GOBINARY) install github.com/swaggo/swag/cmd/swag@v1.16.4
 else
 	SWAGINSTALL :=
@@ -112,6 +115,7 @@ rebuildHash := $(strip $(shell echo $(rebuildVals) | sha256sum | cut -d " " -f1)
 rebuildHashFile := $(DATA)/buildhash-$(rebuildHash).txt
 
 CONFIG_BASE = config/config-base.yaml
+NODE_MODULES = node_modules/.package-lock.json
 
 # CONFIG_DESCRIPTION = $(DATA)/config-base.json
 CONFIG_DEFAULT = $(DATA)/config-default.ini
@@ -131,7 +135,13 @@ configuration: $(CONFIG_DEFAULT)
 
 EMAIL_SRC = $(wildcard mail/*)
 EMAIL_TARGET = $(DATA)/confirmation.html
-$(EMAIL_TARGET): $(EMAIL_SRC)
+$(NODE_MODULES): package.json package-lock.json
+	$(info installing npm dependencies)
+	npm ci $(NPMOPTS)
+
+npm: $(NODE_MODULES)
+
+$(EMAIL_TARGET): $(EMAIL_SRC) $(NODE_MODULES)
 	$(info Generating email html)
 	npx mjml mail/*.mjml -o $(DATA)/
 	$(info Copying plaintext mail)
@@ -142,7 +152,7 @@ TYPESCRIPT_SRC = $(wildcard ts/*.ts)
 TYPESCRIPT_TEMPSRC = $(TYPESCRIPT_SRC:ts/%=tempts/%)
 # TYPESCRIPT_TARGET = $(patsubst %.ts,%.js,$(subst tempts/,./$(DATA)/web/js/,$(TYPESCRIPT_TEMPSRC)))
 TYPESCRIPT_TARGET = $(DATA)/web/js/admin.js
-$(TYPESCRIPT_TARGET): $(TYPESCRIPT_FULLSRC) ts/tsconfig.json
+$(TYPESCRIPT_TARGET): $(TYPESCRIPT_FULLSRC) ts/tsconfig.json $(NODE_MODULES)
 	$(TYPECHECK)
 	# rm -rf tempts
 	# cp -r ts tempts
@@ -160,7 +170,7 @@ SWAGGER_SRC = $(wildcard api*.go) $(wildcard *auth.go) views.go
 SWAGGER_TARGET = docs/docs.go
 $(SWAGGER_TARGET): $(SWAGGER_SRC)
 	$(SWAGINSTALL)
-	swag init --parseDependency --parseInternal -g main.go
+	$(SWAG) init --parseDependency --parseInternal -g main.go
 
 VARIANTS_SRC = $(wildcard html/*.html) $(wildcard html/*.txt)
 VARIANTS_TARGET = $(DATA)/html/admin.html
@@ -184,7 +194,7 @@ CSS_FULLTARGET = $(CSS_BUNDLE)
 ALL_CSS_SRC = $(ICON_SRC) $(CSS_SRC) $(SYNTAX_LIGHT_SRC) $(SYNTAX_DARK_SRC)
 ALL_CSS_TARGET = $(ICON_TARGET)
 
-$(CSS_FULLTARGET): $(TYPESCRIPT_TARGET) $(VARIANTS_TARGET) $(ALL_CSS_SRC) $(wildcard html/*.html) $(wildcard html.*.txt)
+$(CSS_FULLTARGET): $(TYPESCRIPT_TARGET) $(VARIANTS_TARGET) $(ALL_CSS_SRC) $(wildcard html/*.html) $(wildcard html.*.txt) $(NODE_MODULES)
 	$(info copying fonts)
 	cp -r node_modules/remixicon/fonts/remixicon.css node_modules/remixicon/fonts/remixicon.woff2 $(DATA)/web/css/
 	cp -r $(SYNTAX_LIGHT_SRC) $(SYNTAX_LIGHT_TARGET)
@@ -267,7 +277,3 @@ clean:
 	-rm mail/*.html
 	-rm docs/docs.go docs/swagger.json docs/swagger.yaml
 	go clean
-
-npm:
-	$(info installing npm dependencies)
-	npm install $(NPMOPTS)

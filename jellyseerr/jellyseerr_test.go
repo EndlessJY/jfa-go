@@ -1,23 +1,37 @@
 package jellyseerr
 
 import (
+	"os"
 	"testing"
 
 	"github.com/hrfee/jfa-go/common"
 )
 
 const (
-	API_KEY = "MTcyMjI2MDM2MTYyMzMxNDZkZmYyLTE4MzMtNDUyNy1hODJlLTI0MTZkZGUyMDg2Ng=="
-	URI     = "http://localhost:5055"
-	PERM    = 2097184
+	PERM = 2097184
 )
 
-func client() *Jellyseerr {
-	return NewJellyseerr(URI, API_KEY, common.NewTimeoutHandler("Jellyseerr", URI, false))
+func client(t *testing.T) *Jellyseerr {
+	t.Helper()
+	uri := os.Getenv("JELLYSEERR_TEST_URI")
+	key := os.Getenv("JELLYSEERR_TEST_API_KEY")
+	if uri == "" || key == "" {
+		t.Skip("set JELLYSEERR_TEST_URI and JELLYSEERR_TEST_API_KEY to run Jellyseerr integration tests")
+	}
+	return NewJellyseerr(uri, key, common.NewTimeoutHandler("Jellyseerr", uri, false))
+}
+
+func testJellyfinID(t *testing.T) string {
+	t.Helper()
+	id := os.Getenv("JELLYSEERR_TEST_JF_ID")
+	if id == "" {
+		t.Skip("set JELLYSEERR_TEST_JF_ID to run this Jellyseerr integration test")
+	}
+	return id
 }
 
 func TestMe(t *testing.T) {
-	js := client()
+	js := client(t)
 	u, err := js.Me()
 	if err != nil {
 		t.Fatalf("returned error %+v", err)
@@ -39,8 +53,8 @@ func TestMe(t *testing.T) {
 } */
 
 func TestMustGetUser(t *testing.T) {
-	js := client()
-	u, err := js.MustGetUser("8c9d25c070d641cd8ad9cf825f622a16")
+	js := client(t)
+	u, err := js.MustGetUser(testJellyfinID(t))
 	if err != nil {
 		t.Fatalf("returned error %+v", err)
 	}
@@ -50,16 +64,16 @@ func TestMustGetUser(t *testing.T) {
 }
 
 func TestSetPermissions(t *testing.T) {
-	js := client()
-	err := js.SetPermissions("6b75e189efb744f583aa2e8e9cee41d3", PERM)
+	js := client(t)
+	err := js.SetPermissions(testJellyfinID(t), PERM)
 	if err != nil {
 		t.Fatalf("returned error %+v", err)
 	}
 }
 
 func TestGetPermissions(t *testing.T) {
-	js := client()
-	perm, err := js.GetPermissions("6b75e189efb744f583aa2e8e9cee41d3")
+	js := client(t)
+	perm, err := js.GetPermissions(testJellyfinID(t))
 	if err != nil {
 		t.Fatalf("returned error %+v", err)
 	}

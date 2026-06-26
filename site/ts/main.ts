@@ -24,10 +24,12 @@ export const unstableSect = document.getElementById("sect-unstable");
 const stableButton = document.getElementById("download-stable") as HTMLSpanElement;
 const unstableButton = document.getElementById("download-unstable") as HTMLSpanElement;
 
+const dockerStable = document.getElementById("docker-stable");
 const dockerUnstable = document.getElementById("docker-unstable");
 
 stableButton.onclick = () => {
     debUnstable.classList.add("unfocused");
+    dockerStable.classList.remove("unfocused");
     dockerUnstable.classList.add("unfocused");
     stableButton.classList.add("@high");
     stableButton.classList.remove("@low");
@@ -39,6 +41,7 @@ stableButton.onclick = () => {
 
 unstableButton.onclick = () => {
     debUnstable.classList.remove("unfocused");
+    dockerStable.classList.add("unfocused");
     dockerUnstable.classList.remove("unfocused");
     unstableButton.classList.add("@high");
     unstableButton.classList.remove("@low");

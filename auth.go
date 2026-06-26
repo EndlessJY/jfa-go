@@ -79,12 +79,12 @@ func CreateToken(userId, jfId string, admin bool) (string, string, error) {
 func (app *appContext) decodeValidateAuthHeader(gc *gin.Context) (claims jwt.MapClaims, ok bool) {
 	ok = false
 	header := strings.SplitN(gc.Request.Header.Get("Authorization"), " ", 2)
-	if header[0] != "Bearer" {
+	if len(header) != 2 || header[0] != "Bearer" || header[1] == "" {
 		app.authLog(lm.InvalidAuthHeader)
 		respond(401, "Unauthorized", gc)
 		return
 	}
-	token, err := jwt.Parse(string(header[1]), checkToken)
+	token, err := jwt.Parse(header[1], checkToken)
 	if err != nil {
 		app.authLog(fmt.Sprintf(lm.FailedParseJWT, err))
 		respond(401, "Unauthorized", gc)
@@ -96,9 +96,36 @@ func (app *appContext) decodeValidateAuthHeader(gc *gin.Context) (claims jwt.Map
 		respond(401, "Unauthorized", gc)
 		return
 	}
-	expiryUnix := int64(claims["exp"].(float64))
+	expiryFloat, ok := claims["exp"].(float64)
+	if !ok {
+		app.authLog(lm.InvalidJWT)
+		respond(401, "Unauthorized", gc)
+		return
+	}
+	claimType, ok := claims["type"].(string)
+	if !ok {
+		app.authLog(lm.InvalidJWT)
+		respond(401, "Unauthorized", gc)
+		return
+	}
+	if _, ok = claims["id"].(string); !ok {
+		app.authLog(lm.InvalidJWT)
+		respond(401, "Unauthorized", gc)
+		return
+	}
+	if _, ok = claims["jfid"].(string); !ok {
+		app.authLog(lm.InvalidJWT)
+		respond(401, "Unauthorized", gc)
+		return
+	}
+	if _, ok = claims["admin"].(bool); !ok {
+		app.authLog(lm.InvalidJWT)
+		respond(401, "Unauthorized", gc)
+		return
+	}
+	expiryUnix := int64(expiryFloat)
 	expiry := time.Unix(expiryUnix, 0)
-	if !(ok && token.Valid && claims["type"].(string) == "bearer" && expiry.After(time.Now())) {
+	if !(token.Valid && claimType == "bearer" && expiry.After(time.Now())) {
 		app.authLog(lm.InvalidJWT)
 		// app.debug.Printf("Expiry: %+v, OK: %t, Valid: %t, ClaimType: %s\n", expiry, ok, token.Valid, claims["type"].(string))
 		respond(401, "Unauthorized", gc)
@@ -162,8 +189,23 @@ type getTokenDTO struct {
 
 func (app *appContext) decodeValidateLoginHeader(gc *gin.Context, userpage bool) (username, password string, ok bool) {
 	header := strings.SplitN(gc.Request.Header.Get("Authorization"), " ", 2)
-	auth, _ := base64.StdEncoding.DecodeString(header[1])
+	if len(header) != 2 || header[0] != "Basic" || header[1] == "" {
+		app.logIpDebug(gc, userpage, fmt.Sprintf(lm.FailedAuthRequest, lm.InvalidAuthHeader))
+		respond(401, "Unauthorized", gc)
+		return
+	}
+	auth, err := base64.StdEncoding.DecodeString(header[1])
+	if err != nil {
+		app.logIpDebug(gc, userpage, fmt.Sprintf(lm.FailedAuthRequest, lm.InvalidAuthHeader))
+		respond(401, "Unauthorized", gc)
+		return
+	}
 	creds := strings.SplitN(string(auth), ":", 2)
+	if len(creds) != 2 {
+		app.logIpDebug(gc, userpage, fmt.Sprintf(lm.FailedAuthRequest, lm.InvalidAuthHeader))
+		respond(401, "Unauthorized", gc)
+		return
+	}
 	username = creds[0]
 	password = creds[1]
 	ok = false
@@ -306,9 +348,36 @@ func (app *appContext) decodeValidateRefreshCookie(gc *gin.Context, cookieName s
 		return
 	}
 	claims, ok = token.Claims.(jwt.MapClaims)
-	expiryUnix := int64(claims["exp"].(float64))
+	if !ok {
+		app.authLog(lm.FailedCastJWT)
+		respond(401, lm.InvalidJWT, gc)
+		return
+	}
+	expiryFloat, ok := claims["exp"].(float64)
+	if !ok {
+		app.authLog(lm.InvalidJWT)
+		respond(401, lm.InvalidJWT, gc)
+		return
+	}
+	claimType, ok := claims["type"].(string)
+	if !ok {
+		app.authLog(lm.InvalidJWT)
+		respond(401, lm.InvalidJWT, gc)
+		return
+	}
+	if _, ok = claims["id"].(string); !ok {
+		app.authLog(lm.InvalidJWT)
+		respond(401, lm.InvalidJWT, gc)
+		return
+	}
+	if _, ok = claims["jfid"].(string); !ok {
+		app.authLog(lm.InvalidJWT)
+		respond(401, lm.InvalidJWT, gc)
+		return
+	}
+	expiryUnix := int64(expiryFloat)
 	expiry := time.Unix(expiryUnix, 0)
-	if !(ok && token.Valid && claims["type"].(string) == "refresh" && expiry.After(time.Now())) {
+	if !(token.Valid && claimType == "refresh" && expiry.After(time.Now())) {
 		app.authLog(lm.InvalidJWT)
 		respond(401, lm.InvalidJWT, gc)
 		ok = false
