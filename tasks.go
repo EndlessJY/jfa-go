@@ -14,23 +14,25 @@ import (
 // @Security Bearer
 // @tags Tasks
 func (app *appContext) TaskList(gc *gin.Context) {
+	lang := app.getLang(gc, AdminPage, app.storage.lang.chosenAdminLang)
+	strings := app.storage.lang.Admin[lang].Strings
 	resp := TasksDTO{Tasks: []TaskDTO{
 		TaskDTO{
 			URL:         "/tasks/housekeeping",
-			Name:        "Housekeeping",
-			Description: "General housekeeping tasks: Clearing expired invites & activities, unused contact details & captchas, etc.",
+			Name:        strings.get("taskHousekeeping"),
+			Description: strings.get("taskHousekeepingDescription"),
 		},
 		TaskDTO{
 			URL:         "/tasks/users",
-			Name:        "Users",
-			Description: "Checks for (pending) account expiries and performs the appropriate actions.",
+			Name:        strings.get("taskUsers"),
+			Description: strings.get("taskUsersDescription"),
 		},
 	}}
 	if app.config.Section("jellyseerr").Key("enabled").MustBool(false) {
 		resp.Tasks = append(resp.Tasks, TaskDTO{
 			URL:         "/tasks/jellyseerr",
-			Name:        "Jellyseerr user import",
-			Description: "Imports existing users into jellyfin and synchronizes contact details. Should only need to be run once when the feature is enabled, which is done automatically.",
+			Name:        strings.get("taskJellyseerrImport"),
+			Description: strings.get("taskJellyseerrImportDescription"),
 		})
 	}
 	gc.JSON(200, resp)

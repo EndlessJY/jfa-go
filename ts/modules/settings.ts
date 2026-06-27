@@ -2002,7 +2002,7 @@ class TasksList {
     private _list: HTMLElement = document.getElementById("modal-tasks-list");
 
     load = () =>
-        _get("/tasks", null, (req: XMLHttpRequest) => {
+        _get(`/tasks?lang=${encodeURIComponent(window.language)}`, null, (req: XMLHttpRequest) => {
             if (req.readyState != 4) return;
             if (req.status != 200) return;
             let resp = req.response["tasks"] as TaskDTO[];
