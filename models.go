@@ -40,6 +40,20 @@ type newUserResponse struct {
 	Error string `json:"error"`                   // Optional error message.
 }
 
+type renewUserDTO struct {
+	Code     string `json:"code" example:"abc0933jncjkcjj"` // Invite code or invite link to use for renewal
+	Username string `json:"username" example:"jeff"`        // User's username
+	Email    string `json:"email" example:"jeff@jellyf.in"` // User's email address
+}
+
+type myRenewDTO struct {
+	Code string `json:"code" example:"abc0933jncjkcjj"` // Invite code or invite link to use for renewal
+}
+
+type renewUserResponse struct {
+	Expiry int64 `json:"expiry" example:"1617737207"` // New account expiry as a Unix timestamp
+}
+
 type deleteUserDTO struct {
 	Users  []string `json:"users" binding:"required"` // List of user IDs.
 	Notify bool     `json:"notify"`                   // Whether to notify users of deletion

@@ -33,6 +33,15 @@
                 <p class="content mb-4">{{ .strings.confirmationRequiredMessage }}</p>
             </div>
         </div>
+        {{ if not .passwordReset }}
+        <div id="modal-renewal-success" class="modal">
+            <div class="card relative mx-auto my-[10%] w-4/5 lg:w-1/3">
+                <span class="heading mb-4">{{ .strings.renewalSuccessHeader }}</span>
+                <p class="content mb-4" id="modal-renewal-success-message" data-template="{{ .strings.renewalSuccessMessage }}">{{ .strings.renewalSuccessMessage }}</p>
+                <a class="button ~urge @low full-width center supra submit" href="{{ .jfLink }}">{{ .strings.continue }}</a>
+            </div>
+        </div>
+        {{ end }}
         {{ template "account-linking.html" . }}
         <div id="notification-box"></div>
         <div class="page-container m-2 lg:my-20 lg:mx-64 flex flex-col gap-4">
@@ -61,7 +70,29 @@
                         {{ if .userExpiry }}
                         <aside class="col aside sm ~warning" id="user-expiry-message"></aside>
                         {{ end }}
-                        <form class="card dark:~d_neutral @low" id="form-create" href="">
+                        {{ if not .passwordReset }}
+                        <div class="card dark:~d_neutral @low mb-4 flex flex-col gap-3" id="invite-mode-select">
+                            <span class="subheading">{{ .strings.chooseInviteAction }}</span>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <button type="button" class="button ~info @low center supra flex flex-row gap-2 justify-center" id="invite-mode-register"><i class="ri-user-add-line"></i><span>{{ .strings.registerAccount }}</span></button>
+                                <button type="button" class="button ~info @low center supra flex flex-row gap-2 justify-center" id="invite-mode-renew"><i class="ri-time-line"></i><span>{{ .strings.renewAccount }}</span></button>
+                            </div>
+                        </div>
+                        <form class="card dark:~d_neutral @low unfocused" id="form-renew" href="">
+                            <p class="content mb-4">{{ .strings.renewAccountDescription }}</p>
+                            <label class="label supra">
+                                {{ .strings.username }}
+                                <input type="text" class="input ~neutral @high mt-2 mb-4" placeholder="{{ .strings.username }}" id="renew-username" aria-label="{{ .strings.username }}" required>
+                            </label>
+                            <label class="label supra" for="renew-email">{{ .strings.emailAddress }}</label>
+                            <input type="email" class="input ~neutral @high mt-2 mb-4" placeholder="{{ .strings.emailAddress }}" id="renew-email" aria-label="{{ .strings.emailAddress }}" required>
+                            <label>
+                                <input type="submit" class="unfocused">
+                                <span class="button ~urge @low full-width center supra submit">{{ .strings.renewAccountButton }}</span>
+                            </label>
+                        </form>
+                        {{ end }}
+                        <form class="card dark:~d_neutral @low{{ if not .passwordReset }} unfocused{{ end }}" id="form-create" href="">
                             {{ if not .passwordReset }}
                             <label class="label supra">
                                 {{ .strings.username }}
@@ -130,6 +161,7 @@
                                 {{ .preSignupCardContent }}
                             </div>
                         {{ end }}
+                        <div id="registration-side-panel" class="{{ if not .passwordReset }}unfocused{{ end }}">
                         <div class="card ~neutral @low mb-4">
                             <span class="label supra">{{ .strings.passwordRequirementsHeader }}</span>
                             <ul>
@@ -157,6 +189,7 @@
                             {{ end }}
                         </div>
                         {{ end }}
+                        </div>
                         {{ if .contactMessage }}
                             <aside class="col aside sm ~info mt-4">{{ .contactMessage }}</aside>
                         {{ end }}

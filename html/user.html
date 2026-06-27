@@ -128,6 +128,15 @@
                         <div class="user-expiry-countdown"></div>
                     </div>
                 </div>
+                <div>
+                    <div class="card @low dark:~d_neutral flex flex-col gap-2" id="card-renewal">
+                        <span class="heading">{{ .strings.accountRenewal }}</span>
+                        <aside class="aside ~neutral col">{{ .strings.accountRenewalDescription }}</aside>
+                        <label class="label supra" for="user-renewal-code">{{ .strings.renewalCodeOrLink }}</label>
+                        <input type="text" class="input ~neutral @low" placeholder="{{ .strings.renewalCodeOrLink }}" id="user-renewal-code" aria-label="{{ .strings.renewalCodeOrLink }}" required>
+                        <span class="button ~info @low full-width center" id="user-renewal-submit">{{ .strings.renewAccountButton }}</span>
+                    </div>
+                </div>
                 {{ if .referralsEnabled }}
                     <div>
                         <div class="card @low dark:~d_neutral unfocused flex flex-col gap-2" id="card-referrals">

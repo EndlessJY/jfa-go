@@ -151,6 +151,7 @@ func (app *appContext) loadRoutes(router *gin.Engine) {
 		router.GET(p+"/token/login", app.getTokenLogin)
 		router.GET(p+"/token/refresh", app.getTokenRefresh)
 		router.POST(p+"/user/invite", app.NewUserFromInvite)
+		router.POST(p+"/user/renew", app.RenewUserFromInvite)
 		router.Use(serveTaggedStatic(p+PAGES.Form+"/", app.webFS))
 		router.GET(p+PAGES.Form+"/:invCode", app.InviteProxy)
 		if app.config.Section("captcha").Key("enabled").MustBool(false) {
@@ -313,6 +314,7 @@ func (app *appContext) loadRoutes(router *gin.Engine) {
 			user.DELETE("/telegram", app.UnlinkMyTelegram)
 			user.DELETE("/matrix", app.UnlinkMyMatrix)
 			user.POST("/password", app.ChangeMyPassword)
+			user.POST("/renew", app.RenewMyAccount)
 			if app.config.Section("user_page").Key("referrals").MustBool(false) {
 				user.GET("/referral", app.GetMyReferral)
 			}

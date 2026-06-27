@@ -667,6 +667,54 @@ changePasswordButton.addEventListener("click", () => {
     );
 });
 
+const renewalCodeField = document.getElementById("user-renewal-code") as HTMLInputElement;
+const renewalSubmitButton = document.getElementById("user-renewal-submit") as HTMLSpanElement;
+const renewalSubmitText = renewalSubmitButton.textContent;
+
+const showRenewalError = (req: XMLHttpRequest) => {
+    if (req.readyState != 4) return;
+    removeLoader(renewalSubmitButton);
+    if (req.status == 200) return;
+
+    renewalSubmitButton.classList.add("~critical");
+    renewalSubmitButton.classList.remove("~info");
+    const errorKey = req.response && req.response["error"] ? req.response["error"] : "errorUnknown";
+    renewalSubmitButton.textContent = window.lang.notif(errorKey) || errorKey;
+    setTimeout(() => {
+        renewalSubmitButton.classList.add("~info");
+        renewalSubmitButton.classList.remove("~critical");
+        renewalSubmitButton.textContent = renewalSubmitText;
+    }, 1500);
+};
+
+renewalSubmitButton.addEventListener("click", () => {
+    if (!renewalCodeField.value.trim()) {
+        renewalCodeField.reportValidity();
+        return;
+    }
+
+    addLoader(renewalSubmitButton);
+    _post(
+        "/my/renew",
+        { code: renewalCodeField.value },
+        (req: XMLHttpRequest) => {
+            if (req.readyState != 4) return;
+            removeLoader(renewalSubmitButton);
+            if (req.status != 200) return;
+
+            const expiry = toDateString(new Date(req.response["expiry"] * 1000));
+            window.notifications.customSuccess(
+                "accountRenewed",
+                window.lang.notif("accountRenewed").replace("{date}", expiry),
+            );
+            renewalCodeField.value = "";
+            document.dispatchEvent(new CustomEvent("details-reload"));
+        },
+        true,
+        showRenewalError,
+    );
+});
+
 document.addEventListener("details-reload", () => {
     _get("/my/details", null, (req: XMLHttpRequest) => {
         if (req.readyState == 4) {

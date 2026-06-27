@@ -10,6 +10,7 @@ import { setupTooltips } from "./modules/ui.js";
 interface formWindow extends GlobalWindow {
     invalidPassword: string;
     successModal: Modal;
+    renewalSuccessModal: Modal;
     telegramModal: Modal;
     discordModal: Modal;
     matrixModal: Modal;
@@ -52,6 +53,7 @@ window.notifications = new notificationBox(document.getElementById("notification
 window.animationEvent = whichAnimationEvent();
 
 window.successModal = new Modal(document.getElementById("modal-success"), true);
+window.renewalSuccessModal = new Modal(document.getElementById("modal-renewal-success"), true);
 
 var telegramVerified = false;
 if (window.telegramEnabled) {
@@ -175,6 +177,10 @@ if (window.userExpiryEnabled) {
 }
 
 const form = document.getElementById("form-create") as HTMLFormElement;
+const renewForm = document.getElementById("form-renew") as HTMLFormElement;
+const registerModeButton = document.getElementById("invite-mode-register") as HTMLButtonElement;
+const renewModeButton = document.getElementById("invite-mode-renew") as HTMLButtonElement;
+const registrationSidePanel = document.getElementById("registration-side-panel") as HTMLDivElement;
 const submitInput = form.querySelector("input[type=submit]") as HTMLInputElement;
 const submitSpan = form.querySelector("span.submit") as HTMLSpanElement;
 const submitText = submitSpan.textContent;
@@ -190,6 +196,25 @@ if (!window.usernameEnabled) {
 }
 const passwordField = document.getElementById("create-password") as HTMLInputElement;
 const rePasswordField = document.getElementById("create-reenter-password") as HTMLInputElement;
+
+const setInviteMode = (mode: "register" | "renew") => {
+    const registerMode = mode == "register";
+    form.classList.toggle("unfocused", !registerMode);
+    renewForm.classList.toggle("unfocused", registerMode);
+    registrationSidePanel.classList.toggle("unfocused", !registerMode);
+
+    registerModeButton.classList.toggle("~urge", registerMode);
+    registerModeButton.classList.toggle("~info", !registerMode);
+    renewModeButton.classList.toggle("~urge", !registerMode);
+    renewModeButton.classList.toggle("~info", registerMode);
+
+    if (registerMode) {
+        validator.validate();
+    }
+};
+
+registerModeButton.onclick = () => setInviteMode("register");
+renewModeButton.onclick = () => setInviteMode("renew");
 
 let captcha = new Captcha(window.code, window.captcha, window.reCAPTCHA, false);
 
@@ -394,9 +419,64 @@ const create = (event: SubmitEvent) => {
     );
 };
 
+const renewSubmitInput = renewForm.querySelector("input[type=submit]") as HTMLInputElement;
+const renewSubmitSpan = renewForm.querySelector("span.submit") as HTMLSpanElement;
+const renewSubmitText = renewSubmitSpan.textContent;
+const renewUsernameField = document.getElementById("renew-username") as HTMLInputElement;
+const renewEmailField = document.getElementById("renew-email") as HTMLInputElement;
+
+const showRenewError = (req: XMLHttpRequest) => {
+    if (req.readyState != 4) return;
+    removeLoader(renewSubmitSpan);
+    if (req.status == 200) return;
+
+    renewSubmitSpan.classList.add("~critical");
+    renewSubmitSpan.classList.remove("~urge");
+    const errorKey = req.response && req.response["error"] ? req.response["error"] : "errorUnknown";
+    renewSubmitSpan.textContent = window.messages[errorKey] || errorKey;
+    setTimeout(() => {
+        renewSubmitSpan.classList.add("~urge");
+        renewSubmitSpan.classList.remove("~critical");
+        renewSubmitSpan.textContent = renewSubmitText;
+    }, 1500);
+};
+
+const renew = (event: SubmitEvent) => {
+    event.preventDefault();
+    renewSubmitInput.setCustomValidity("");
+    if (!renewUsernameField.value.trim() || !renewEmailField.value.includes("@")) {
+        renewSubmitInput.setCustomValidity(window.messages["errorNoEmail"]);
+        renewSubmitInput.reportValidity();
+        return;
+    }
+
+    addLoader(renewSubmitSpan);
+    _post(
+        "/user/renew",
+        {
+            code: window.code,
+            username: renewUsernameField.value,
+            email: renewEmailField.value,
+        },
+        (req: XMLHttpRequest) => {
+            if (req.readyState != 4) return;
+            removeLoader(renewSubmitSpan);
+            if (req.status != 200) return;
+
+            const expiry = new Date(req.response["expiry"] * 1000);
+            const message = document.getElementById("modal-renewal-success-message") as HTMLElement;
+            message.textContent = message.getAttribute("data-template").replace("{date}", toDateString(expiry));
+            window.renewalSuccessModal.show();
+        },
+        true,
+        showRenewError,
+    );
+};
+
 validator.validate();
 
 form.onsubmit = create;
+renewForm.onsubmit = renew;
 
 const invitedByAside = document.getElementById("invite-from-user");
 if (typeof invitedByAside != "undefined" && invitedByAside != null) {

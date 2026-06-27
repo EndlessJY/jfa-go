@@ -72,30 +72,118 @@ export function DateCountdown(el: HTMLElement, unixSeconds: number): ReturnType<
     return setTimeout(update, 60000);
 }
 
+let refreshTokenRequest: Promise<boolean> | null = null;
+
+const pathFromURL = (url: string): string => {
+    try {
+        return new URL(url, "http://jfa-go.local").pathname;
+    } catch (e) {
+        return url.split("?")[0];
+    }
+};
+
+const refreshEndpointForRequest = (url: string): string => {
+    const base = window.pages?.Base || "";
+    const path = pathFromURL(url);
+    if (path.startsWith(base + "/my/")) {
+        return base + "/my/token/refresh";
+    }
+    return base + "/token/refresh";
+};
+
+const requestCanRefreshAuth = (url: string): boolean => {
+    if (!window.token) return false;
+
+    const base = window.pages?.Base || "";
+    const path = pathFromURL(url);
+    if (path.includes("/token/")) return false;
+    if (path.startsWith(base + "/captcha/")) return false;
+    if (path.startsWith(base + "/lang/")) return false;
+    if (path == base + "/user/invite" || path == base + "/user/renew") return false;
+    return true;
+};
+
+const refreshAuthToken = (requestURL: string): Promise<boolean> => {
+    if (refreshTokenRequest) return refreshTokenRequest;
+
+    refreshTokenRequest = new Promise((resolve) => {
+        const req = new XMLHttpRequest();
+        req.open("GET", refreshEndpointForRequest(requestURL), true);
+        req.responseType = "json";
+        req.onreadystatechange = () => {
+            if (req.readyState != 4) return;
+
+            if (req.status == 200 && req.response && typeof req.response["token"] == "string") {
+                window.token = req.response["token"];
+                resolve(true);
+            } else {
+                resolve(false);
+            }
+        };
+        req.send();
+    });
+
+    refreshTokenRequest.then(
+        () => {
+            refreshTokenRequest = null;
+        },
+        () => {
+            refreshTokenRequest = null;
+        },
+    );
+
+    return refreshTokenRequest;
+};
+
+const handleRequestStatus = (
+    req: XMLHttpRequest,
+    statusHandler?: (req: XMLHttpRequest) => void,
+    noConnectionError: boolean = false,
+) => {
+    if (statusHandler) {
+        statusHandler(req);
+    } else if (req.readyState == 4 && req.status == 0) {
+        if (!noConnectionError) window.notifications.connectionError();
+    } else if (req.readyState == 4 && req.status == 401) {
+        window.notifications.customError("401Error", window.lang.notif("error401Unauthorized"));
+    }
+};
+
 export const _get = (
     url: string,
     data: Object,
     onreadystatechange: (req: XMLHttpRequest) => void,
     noConnectionError: boolean = false,
 ): void => {
-    let req = new XMLHttpRequest();
-    if (window.pages) {
-        url = window.pages.Base + url;
-    }
-    req.open("GET", url, true);
-    req.responseType = "json";
-    req.setRequestHeader("Authorization", "Bearer " + window.token);
-    req.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-    req.onreadystatechange = () => {
-        if (req.status == 0) {
-            if (!noConnectionError) window.notifications.connectionError();
-            return;
-        } else if (req.status == 401) {
-            window.notifications.customError("401Error", window.lang.notif("error401Unauthorized"));
+    const originalURL = url;
+    const send = (retried: boolean) => {
+        let req = new XMLHttpRequest();
+        url = originalURL;
+        if (window.pages) {
+            url = window.pages.Base + url;
         }
-        onreadystatechange(req);
+        req.open("GET", url, true);
+        req.responseType = "json";
+        req.setRequestHeader("Authorization", "Bearer " + window.token);
+        req.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+        req.onreadystatechange = () => {
+            if (req.readyState == 4 && req.status == 401 && !retried && requestCanRefreshAuth(url)) {
+                refreshAuthToken(url).then((refreshed) => {
+                    if (refreshed) {
+                        send(true);
+                        return;
+                    }
+                    handleRequestStatus(req, null, noConnectionError);
+                    onreadystatechange(req);
+                });
+                return;
+            }
+            handleRequestStatus(req, null, noConnectionError);
+            onreadystatechange(req);
+        };
+        req.send(JSON.stringify(data));
     };
-    req.send(JSON.stringify(data));
+    send(false);
 };
 
 export const _download = (url: string, fname: string): void => {
@@ -136,28 +224,37 @@ export const _req = (
     statusHandler?: (req: XMLHttpRequest) => void,
     noConnectionError: boolean = false,
 ): void => {
-    let req = new XMLHttpRequest();
-    if (window.pages) {
-        url = window.pages.Base + url;
-    }
-    req.open(method, url, true);
-    if (response) {
-        req.responseType = "json";
-    }
-    req.setRequestHeader("Authorization", "Bearer " + window.token);
-    req.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-    req.onreadystatechange = () => {
-        if (statusHandler) {
-            statusHandler(req);
-        } else if (req.status == 0) {
-            if (!noConnectionError) window.notifications.connectionError();
-            return;
-        } else if (req.status == 401) {
-            window.notifications.customError("401Error", window.lang.notif("error401Unauthorized"));
+    const originalURL = url;
+    const send = (retried: boolean) => {
+        let req = new XMLHttpRequest();
+        url = originalURL;
+        if (window.pages) {
+            url = window.pages.Base + url;
         }
-        onreadystatechange(req);
+        req.open(method, url, true);
+        if (response) {
+            req.responseType = "json";
+        }
+        req.setRequestHeader("Authorization", "Bearer " + window.token);
+        req.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+        req.onreadystatechange = () => {
+            if (req.readyState == 4 && req.status == 401 && !retried && requestCanRefreshAuth(url)) {
+                refreshAuthToken(url).then((refreshed) => {
+                    if (refreshed) {
+                        send(true);
+                        return;
+                    }
+                    handleRequestStatus(req, statusHandler, noConnectionError);
+                    onreadystatechange(req);
+                });
+                return;
+            }
+            handleRequestStatus(req, statusHandler, noConnectionError);
+            onreadystatechange(req);
+        };
+        req.send(JSON.stringify(data));
     };
-    req.send(JSON.stringify(data));
+    send(false);
 };
 
 export const _post = (
@@ -193,23 +290,34 @@ export function _delete(
     onreadystatechange: (req: XMLHttpRequest) => void,
     noConnectionError: boolean = false,
 ): void {
-    let req = new XMLHttpRequest();
-    if (window.pages) {
-        url = window.pages.Base + url;
-    }
-    req.open("DELETE", url, true);
-    req.setRequestHeader("Authorization", "Bearer " + window.token);
-    req.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-    req.onreadystatechange = () => {
-        if (req.status == 0) {
-            if (!noConnectionError) window.notifications.connectionError();
-            return;
-        } else if (req.status == 401) {
-            window.notifications.customError("401Error", window.lang.notif("error401Unauthorized"));
+    const originalURL = url;
+    const send = (retried: boolean) => {
+        let req = new XMLHttpRequest();
+        url = originalURL;
+        if (window.pages) {
+            url = window.pages.Base + url;
         }
-        onreadystatechange(req);
+        req.open("DELETE", url, true);
+        req.setRequestHeader("Authorization", "Bearer " + window.token);
+        req.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+        req.onreadystatechange = () => {
+            if (req.readyState == 4 && req.status == 401 && !retried && requestCanRefreshAuth(url)) {
+                refreshAuthToken(url).then((refreshed) => {
+                    if (refreshed) {
+                        send(true);
+                        return;
+                    }
+                    handleRequestStatus(req, null, noConnectionError);
+                    onreadystatechange(req);
+                });
+                return;
+            }
+            handleRequestStatus(req, null, noConnectionError);
+            onreadystatechange(req);
+        };
+        req.send(JSON.stringify(data));
     };
-    req.send(JSON.stringify(data));
+    send(false);
 }
 
 export function toClipboard(str: string) {
