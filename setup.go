@@ -41,13 +41,14 @@ func (app *appContext) ServeSetup(gc *gin.Context) {
 	}
 	pages := PagePathsDTO{PagePaths: PAGES}
 	app.gcHTML(gc, 200, "setup.html", SetupPage, lang, gin.H{
-		"cssVersion": cssVersion,
-		"pages":      pages,
-		"lang":       app.storage.lang.Setup[lang],
-		"strings":    app.storage.lang.Setup[lang].Strings,
-		"emailLang":  app.storage.lang.Email[emailLang],
-		"language":   app.storage.lang.Setup[lang].JSON,
-		"messages":   string(msg),
+		"cssVersion":   cssVersion,
+		"cacheVersion": buildTimeUnix,
+		"pages":        pages,
+		"lang":         app.storage.lang.Setup[lang],
+		"strings":      app.storage.lang.Setup[lang].Strings,
+		"emailLang":    app.storage.lang.Email[emailLang],
+		"language":     app.storage.lang.Setup[lang].JSON,
+		"messages":     string(msg),
 	})
 }
 

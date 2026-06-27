@@ -37,12 +37,12 @@
     {{ end }}
 </script>
 {{ if .passwordReset }}
-<script src="js/pwr.js" type="module"></script>
+<script src="js/pwr.js?v={{ .cacheVersion }}" type="module"></script>
 <script>
     window.pwrPIN = "{{ .pwrPIN }}";
 </script>
 {{ else }}
-<script src="js/form.js" type="module"></script>
+<script src="js/form.js?v={{ .cacheVersion }}" type="module"></script>
 {{ end }}
 {{ if .reCAPTCHA }}
 <script>

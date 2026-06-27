@@ -114,6 +114,7 @@ func (app *appContext) BasePageTemplateValues(gc *gin.Context, lang string, page
 	set("notifications", notificationsEnabled)
 	set("cssClass", app.cssClass)
 	set("cssVersion", cssVersion)
+	set("cacheVersion", buildTimeUnix)
 	set("emailEnabled", emailEnabled)
 	set("telegramEnabled", telegramEnabled)
 	set("discordEnabled", discordEnabled)

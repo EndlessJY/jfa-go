@@ -571,6 +571,6 @@
             window.langFile = JSON.parse({{ .language }});
             window.messages = JSON.parse({{ .messages }});
         </script>
-        <script src="js/setup.js" type="module"></script>
+        <script src="js/setup.js?v={{ .cacheVersion }}" type="module"></script>
     </body>
 </html>
