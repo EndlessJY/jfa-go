@@ -24,6 +24,8 @@
         "renewalCodeOrLink": "邀请码或邀请链接",
         "renewalSuccessHeader": "续期成功",
         "renewalSuccessMessage": "你的账号已续期，有效期至 {date}。",
+        "newAccountWillBeValidUntil": "新账号有效期至 {date}。",
+        "renewalExpiryHint": "此邀请码会在续期成功后延长已有账号的有效期，新的到期时间会在提交后显示。",
         "passwordRequirementsHeader": "密码要求",
         "successHeader": "成功！",
         "confirmationRequired": "需要邮件确认",

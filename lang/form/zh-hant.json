@@ -24,6 +24,8 @@
         "renewalCodeOrLink": "邀請碼或邀請連結",
         "renewalSuccessHeader": "續期成功",
         "renewalSuccessMessage": "你的帳號已續期，有效期至 {date}。",
+        "newAccountWillBeValidUntil": "新帳號有效期至 {date}。",
+        "renewalExpiryHint": "此邀請碼會在續期成功後延長現有帳號的有效期，新的到期時間會在提交後顯示。",
         "passwordRequirementsHeader": "密碼要求",
         "successHeader": "成功！",
         "confirmationRequired": "需要郵件確認",

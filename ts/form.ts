@@ -34,6 +34,8 @@ interface formWindow extends GlobalWindow {
     userExpiryHours: number;
     userExpiryMinutes: number;
     userExpiryMessage: string;
+    userExpiryRegisterMessage: string;
+    userExpiryRenewalMessage: string;
     emailRequired: boolean;
     captcha: boolean;
     reCAPTCHA: boolean;
@@ -161,19 +163,32 @@ if (window.confirmation) {
 }
 declare var window: formWindow;
 
+let currentInviteMode: "register" | "renew" | null = null;
+let updateUserExpiryMessage = () => {};
 if (window.userExpiryEnabled) {
     const messageEl = document.getElementById("user-expiry-message") as HTMLElement;
-    const calculateTime = () => {
+    updateUserExpiryMessage = () => {
+        if (currentInviteMode == null) {
+            messageEl.classList.add("unfocused");
+            return;
+        }
+        messageEl.classList.remove("unfocused");
+
+        if (currentInviteMode == "renew") {
+            messageEl.textContent = window.userExpiryRenewalMessage;
+            return;
+        }
+
         let time = new Date();
         time.setMonth(time.getMonth() + window.userExpiryMonths);
         time.setDate(time.getDate() + window.userExpiryDays);
         time.setHours(time.getHours() + window.userExpiryHours);
         time.setMinutes(time.getMinutes() + window.userExpiryMinutes);
-        messageEl.textContent = window.userExpiryMessage.replace("{date}", toDateString(time));
-        setTimeout(calculateTime, 1000);
+        messageEl.textContent = window.userExpiryRegisterMessage.replace("{date}", toDateString(time));
     };
-    document.addEventListener("timefmt-change", calculateTime);
-    calculateTime();
+    document.addEventListener("timefmt-change", updateUserExpiryMessage);
+    window.setInterval(updateUserExpiryMessage, 60 * 1000);
+    updateUserExpiryMessage();
 }
 
 const form = document.getElementById("form-create") as HTMLFormElement;
@@ -198,10 +213,12 @@ const passwordField = document.getElementById("create-password") as HTMLInputEle
 const rePasswordField = document.getElementById("create-reenter-password") as HTMLInputElement;
 
 const setInviteMode = (mode: "register" | "renew") => {
+    currentInviteMode = mode;
     const registerMode = mode == "register";
     form.classList.toggle("unfocused", !registerMode);
     renewForm.classList.toggle("unfocused", registerMode);
     registrationSidePanel.classList.toggle("unfocused", !registerMode);
+    updateUserExpiryMessage();
 
     registerModeButton.classList.toggle("~urge", registerMode);
     registerModeButton.classList.toggle("~info", !registerMode);
