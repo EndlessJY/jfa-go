@@ -50,18 +50,18 @@
             </div>
             <div class="card dark:~d_neutral @low">
                 <div class="flex flex-col md:flex-row gap-3 items-baseline mb-2">
-                    <span class="heading">
+                    <span class="heading" id="form-page-heading" data-initial="{{ .strings.inviteActionHeader }}" data-register="{{ .strings.createAccountHeader }}" data-renew="{{ .strings.renewAccount }}">
                         {{ if .passwordReset }}
                         {{ .strings.passwordReset }}
                         {{ else }}
-                        {{ .strings.createAccountHeader }}
+                        {{ .strings.inviteActionHeader }}
                         {{ end }}
                     </span>
-                    <span class="subheading">
+                    <span class="subheading" id="form-page-subheading" data-initial="{{ .strings.inviteActionDescription }}" data-register="{{ .helpMessage }}" data-renew="{{ .strings.renewAccountSubtitle }}">
                         {{ if .passwordReset }}
                             {{ .strings.enterYourPassword }}
                         {{ else }}
-                            {{ .helpMessage }}
+                            {{ .strings.inviteActionDescription }}
                         {{ end }}
                     </span>
                 </div>
@@ -74,18 +74,18 @@
                         <div class="card dark:~d_neutral @low mb-4 flex flex-col gap-3" id="invite-mode-select">
                             <span class="subheading">{{ .strings.chooseInviteAction }}</span>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                <button type="button" class="button ~info @low center supra flex flex-row gap-2 justify-center" id="invite-mode-register"><i class="ri-user-add-line"></i><span>{{ .strings.registerAccount }}</span></button>
-                                <button type="button" class="button ~info @low center supra flex flex-row gap-2 justify-center" id="invite-mode-renew"><i class="ri-time-line"></i><span>{{ .strings.renewAccount }}</span></button>
+                                <button type="button" class="button ~neutral @low center supra flex flex-row gap-2 justify-center" id="invite-mode-register" aria-pressed="false"><i class="ri-user-add-line"></i><span>{{ .strings.registerAccount }}</span></button>
+                                <button type="button" class="button ~neutral @low center supra flex flex-row gap-2 justify-center" id="invite-mode-renew" aria-pressed="false"><i class="ri-time-line"></i><span>{{ .strings.renewAccount }}</span></button>
                             </div>
                         </div>
                         <form class="card dark:~d_neutral @low unfocused" id="form-renew" href="">
                             <p class="content mb-4">{{ .strings.renewAccountDescription }}</p>
                             <label class="label supra">
-                                {{ .strings.username }}
-                                <input type="text" class="input ~neutral @high mt-2 mb-4" placeholder="{{ .strings.username }}" id="renew-username" aria-label="{{ .strings.username }}" required>
+                                {{ .strings.renewalUsername }}
+                                <input type="text" class="input ~neutral @high mt-2 mb-4" placeholder="{{ .strings.renewalUsernamePlaceholder }}" id="renew-username" aria-label="{{ .strings.renewalUsername }}" required>
                             </label>
-                            <label class="label supra" for="renew-email">{{ .strings.emailAddress }}</label>
-                            <input type="email" class="input ~neutral @high mt-2 mb-4" placeholder="{{ .strings.emailAddress }}" id="renew-email" aria-label="{{ .strings.emailAddress }}" required>
+                            <label class="label supra" for="renew-email">{{ .strings.renewalEmail }}</label>
+                            <input type="email" class="input ~neutral @high mt-2 mb-4" placeholder="{{ .strings.renewalEmailPlaceholder }}" id="renew-email" aria-label="{{ .strings.renewalEmail }}" required>
                             <label>
                                 <input type="submit" class="unfocused">
                                 <span class="button ~urge @low full-width center supra submit">{{ .strings.renewAccountButton }}</span>

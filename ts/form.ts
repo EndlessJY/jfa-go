@@ -196,6 +196,8 @@ const renewForm = document.getElementById("form-renew") as HTMLFormElement;
 const registerModeButton = document.getElementById("invite-mode-register") as HTMLButtonElement;
 const renewModeButton = document.getElementById("invite-mode-renew") as HTMLButtonElement;
 const registrationSidePanel = document.getElementById("registration-side-panel") as HTMLDivElement;
+const pageHeading = document.getElementById("form-page-heading") as HTMLElement;
+const pageSubheading = document.getElementById("form-page-subheading") as HTMLElement;
 const submitInput = form.querySelector("input[type=submit]") as HTMLInputElement;
 const submitSpan = form.querySelector("span.submit") as HTMLSpanElement;
 const submitText = submitSpan.textContent;
@@ -212,18 +214,31 @@ if (!window.usernameEnabled) {
 const passwordField = document.getElementById("create-password") as HTMLInputElement;
 const rePasswordField = document.getElementById("create-reenter-password") as HTMLInputElement;
 
+const setPageCopy = (mode: "initial" | "register" | "renew") => {
+    pageHeading.textContent = pageHeading.getAttribute(`data-${mode}`);
+    pageSubheading.textContent = pageSubheading.getAttribute(`data-${mode}`);
+};
+
+const setModeButtonState = (button: HTMLButtonElement, selected: boolean) => {
+    button.classList.toggle("~urge", selected);
+    button.classList.toggle("~neutral", !selected);
+    button.classList.remove("~info");
+    button.classList.toggle("@high", selected);
+    button.classList.toggle("@low", !selected);
+    button.setAttribute("aria-pressed", selected ? "true" : "false");
+};
+
 const setInviteMode = (mode: "register" | "renew") => {
     currentInviteMode = mode;
     const registerMode = mode == "register";
     form.classList.toggle("unfocused", !registerMode);
     renewForm.classList.toggle("unfocused", registerMode);
     registrationSidePanel.classList.toggle("unfocused", !registerMode);
+    setPageCopy(mode);
     updateUserExpiryMessage();
 
-    registerModeButton.classList.toggle("~urge", registerMode);
-    registerModeButton.classList.toggle("~info", !registerMode);
-    renewModeButton.classList.toggle("~urge", !registerMode);
-    renewModeButton.classList.toggle("~info", registerMode);
+    setModeButtonState(registerModeButton, registerMode);
+    setModeButtonState(renewModeButton, !registerMode);
 
     if (registerMode) {
         validator.validate();
