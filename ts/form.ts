@@ -6,6 +6,7 @@ import { Validator, ValidatorConf, ValidatorRespDTO } from "./modules/validator.
 import { Discord, Telegram, Matrix, ServiceConfiguration, MatrixConfiguration } from "./modules/account-linking.js";
 import { Captcha, GreCAPTCHA } from "./modules/captcha.js";
 import { setupTooltips } from "./modules/ui.js";
+import { userExpiryDisplayForInviteMode } from "./modules/form-user-expiry.js";
 
 interface formWindow extends GlobalWindow {
     invalidPassword: string;
@@ -168,23 +169,18 @@ let updateUserExpiryMessage = () => {};
 if (window.userExpiryEnabled) {
     const messageEl = document.getElementById("user-expiry-message") as HTMLElement;
     updateUserExpiryMessage = () => {
-        if (currentInviteMode == null) {
-            messageEl.classList.add("unfocused");
-            return;
-        }
-        messageEl.classList.remove("unfocused");
-
-        if (currentInviteMode == "renew") {
-            messageEl.textContent = window.userExpiryRenewalMessage;
-            return;
-        }
-
-        let time = new Date();
-        time.setMonth(time.getMonth() + window.userExpiryMonths);
-        time.setDate(time.getDate() + window.userExpiryDays);
-        time.setHours(time.getHours() + window.userExpiryHours);
-        time.setMinutes(time.getMinutes() + window.userExpiryMinutes);
-        messageEl.textContent = window.userExpiryRegisterMessage.replace("{date}", toDateString(time));
+        const display = userExpiryDisplayForInviteMode(currentInviteMode, {
+            months: window.userExpiryMonths,
+            days: window.userExpiryDays,
+            hours: window.userExpiryHours,
+            minutes: window.userExpiryMinutes,
+            formatDate: toDateString,
+            userExpiryMessage: window.userExpiryMessage || "",
+            userExpiryRegisterMessage: window.userExpiryRegisterMessage || "",
+            userExpiryRenewalMessage: window.userExpiryRenewalMessage || "",
+        });
+        messageEl.classList.toggle("unfocused", !display.visible);
+        messageEl.textContent = display.text;
     };
     document.addEventListener("timefmt-change", updateUserExpiryMessage);
     window.setInterval(updateUserExpiryMessage, 60 * 1000);
